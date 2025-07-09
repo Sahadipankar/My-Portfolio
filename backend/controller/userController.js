@@ -4,11 +4,13 @@ import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { generateToken } from "../utils/jwtToken.js";
 
+
 export const register = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Avatar And Resume Are Required!", 400));
   }
   const { avatar, resume } = req.files;
+
 
   //POSTING AVATAR
   const cloudinaryResponseForAvatar = await cloudinary.uploader.upload(
@@ -21,6 +23,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
       cloudinaryResponseForAvatar.error || "Unknown Cloudinary error"
     );
   }
+
 
   //POSTING RESUME
   const cloudinaryResponseForResume = await cloudinary.uploader.upload(
@@ -72,6 +75,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+
 export const login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -89,6 +93,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+
 export const logout = catchAsyncErrors(async (req, res, next) => {
   res
     .status(200)
@@ -103,6 +108,7 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
 });
 
 
+
 export const getUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({
@@ -110,6 +116,7 @@ export const getUser = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
+
 
 
 export const updateProfile = catchAsyncErrors(async (req, res, next) => {
@@ -169,4 +176,31 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     user,
   });
 });
+
+
+
+export const updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+  if (!currentPassword || !newPassword || !confirmNewPassword) {
+    return next(new ErrorHandler("Please Fill All Fields.", 400));
+  }
+  const user = await User.findById(req.user.id).select("+password");
+  const isPasswordMatched = await user.comparePassword(currentPassword);
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Incorrect Current Password!"));
+  }
+  if (newPassword !== confirmNewPassword) {
+    return next(
+      new ErrorHandler("New Password And Confirm New Password Do Not Match!")
+    );
+  }
+  user.password = newPassword;
+  await user.save();
+  res.status(200).json({
+    success: true,
+    message: "Password Updated Successfully!",
+  });
+});
+
+
 
