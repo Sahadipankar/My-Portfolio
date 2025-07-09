@@ -67,7 +67,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
       url: cloudinaryResponseForResume.secure_url, // Set your cloudinary secure_url here
     },
   });
-  
+
   generateToken(user, "User Registered Successfully!", 201, res);
 });
 
@@ -102,10 +102,70 @@ export const logout = catchAsyncErrors(async (req, res, next) => {
     });
 });
 
+
 export const getUser = catchAsyncErrors(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({
     success: true,
+    user,
+  });
+});
+
+
+export const updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const newUserdata = {
+    fullName: req.body.fullName,
+    email: req.body.email,
+    phone: req.body.phone,
+    aboutMe: req.body.aboutMe,
+    githubURL: req.body.githubURL,
+    instagramURL: req.body.instagramURL,
+    portfolioURL: req.body.portfolioURL,
+    facebookURL: req.body.facebookURL,
+    twitterURL: req.body.twitterURL,
+    linkedInURL: req.body.linkedInURL,
+  };
+
+  if (req.files && req.files.avatar) {
+    const avatar = req.files.avatar;
+    const user = await User.findById(req.user.id);
+    const profileImageId = user.avatar.public_id;
+    await cloudinary.uploader.destroy(profileImageId);
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      avatar.tempFilePath,
+      { folder: "PORTFOLIO AVATAR" }
+    );
+    newUserdata.avatar = {
+      public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
+      url: cloudinaryResponse.secure_url, // Set your cloudinary secure_url here
+    };
+  };
+
+  if (req.files && req.files.resume) {
+    const resume = req.files.resume;
+    const user = await User.findById(req.user.id);
+    const resumeId = user.resume.public_id;
+    await cloudinary.uploader.destroy(resumeId);
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      resume.tempFilePath,
+      { folder: "PORTFOLIO RESUME" }
+    );
+    newUserdata.resume = {
+      public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
+      url: cloudinaryResponse.secure_url, // Set your cloudinary secure_url here
+    };
+  };
+
+  const user = await User.findByIdAndUpdate(req.user.id, newUserdata, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  res.status(200).json({
+    success: true,
+    message: "Profile Updated Successfully!",
     user,
   });
 });
