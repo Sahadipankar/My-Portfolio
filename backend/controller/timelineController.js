@@ -25,7 +25,7 @@ export const deleteTimeline = catchAsyncErrors(async (req, res, next) => {
   await timeline.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Timeline Deleted!",
+    message: "Timeline Deleted Successfully!",
   });
 });
 
