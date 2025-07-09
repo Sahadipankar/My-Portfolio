@@ -3,6 +3,7 @@ import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/userSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { generateToken } from "../utils/jwtToken.js";
+import { sendEmail } from "../utils/sendEmail.js";
 
 
 export const register = catchAsyncErrors(async (req, res, next) => {
@@ -211,4 +212,38 @@ export const getUserForPortfolio = catchAsyncErrors(async (req, res, next) => {
     success: true,
     user,
   });
+});
+
+
+
+//FORGOT PASSWORD
+export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(new ErrorHandler("No User Found with this Email!", 404));
+  }
+  const resetToken = user.getResetPasswordToken();
+
+  await user.save({ validateBeforeSave: false });
+
+  const resetPasswordUrl = `${process.env.DASHBOARD_URL}/password/reset/${resetToken}`;
+
+  const message = `\nHello! We've received a request to reset your password for your Personal Portfolio Dashboard account. To reset your password, please click the link below or paste it into your browser:\n\n ${resetPasswordUrl}\n\nIf you did not request a password reset, please ignore this email. Your account will remain secure.\n\nThank you,\nPersonal Portfolio Dashboard Team`;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: `Personal Portfolio Dashboard Password Recovery`,
+      message,
+    });
+    res.status(200).json({
+      success: true,
+      message: `Email sent to ${user.email} successfully`,
+    });
+  } catch (error) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    return next(new ErrorHandler(error.message, 500));
+  }
 });
