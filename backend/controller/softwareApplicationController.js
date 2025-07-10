@@ -20,7 +20,7 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
 
   const cloudinaryResponse = await cloudinary.uploader.upload(
     svg.tempFilePath,
-    { folder: "PORTFOLIO SOFTWARE APPLICATION" }
+    { folder: "MY PORTFOLIO/SOFTWARE APPLICATIONS" }
   );
   
   if (!cloudinaryResponse || cloudinaryResponse.error) {
@@ -48,7 +48,7 @@ export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   let softwareApplication = await SoftwareApplication.findById(id);
   if (!softwareApplication) {
-    return next(new ErrorHandler("Software Application Not Found!", 404));
+    return next(new ErrorHandler("Software Application Not Found by this ID!", 404));
   }
   const softwareApplicationSvgId = softwareApplication.svg.public_id;
   await cloudinary.uploader.destroy(softwareApplicationSvgId);

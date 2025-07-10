@@ -17,7 +17,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   //POSTING AVATAR
   const cloudinaryResponseForAvatar = await cloudinary.uploader.upload(
     avatar.tempFilePath,
-    { folder: "PORTFOLIO AVATAR" }
+    { folder: "MY PORTFOLIO/PORTFOLIO AVATAR" }
   );
   if (!cloudinaryResponseForAvatar || cloudinaryResponseForAvatar.error) {
     console.error(
@@ -30,7 +30,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   //POSTING RESUME
   const cloudinaryResponseForResume = await cloudinary.uploader.upload(
     resume.tempFilePath,
-    { folder: "PORTFOLIO RESUME" }
+    { folder: "MY PORTFOLIO/PORTFOLIO RESUME" }
   );
   if (!cloudinaryResponseForResume || cloudinaryResponseForResume.error) {
     console.error(
