@@ -143,7 +143,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
 
     const cloudinaryResponse = await cloudinary.uploader.upload(
       avatar.tempFilePath,
-      { folder: "PORTFOLIO AVATAR" }
+      { folder: "MY PORTFOLIO/PORTFOLIO AVATAR" }
     );
     newUserdata.avatar = {
       public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
@@ -159,7 +159,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
 
     const cloudinaryResponse = await cloudinary.uploader.upload(
       resume.tempFilePath,
-      { folder: "PORTFOLIO RESUME" }
+      { folder: "MY PORTFOLIO/PORTFOLIO RESUME" }
     );
     newUserdata.resume = {
       public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
