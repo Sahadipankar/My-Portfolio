@@ -7,7 +7,7 @@ export const sendMessage = catchAsyncErrors(async (req, res, next) => {
 
   const { senderName, subject, message } = req.body;
   if (!senderName || !subject || !message) {
-    return next(new ErrorHandler("Please Fill Full Form!", 400));
+    return next(new ErrorHandler("All fields are required!", 400));
   }
   const data = await Message.create({ senderName, subject, message });
   res.status(200).json({
@@ -34,6 +34,6 @@ export const deleteMessage = catchAsyncErrors(async (req, res, next) => {
   await message.deleteOne();
   res.status(201).json({
     success: true,
-    message: "Message Deleted",
+    message: "Message Deleted Successfully!",
   });
 });

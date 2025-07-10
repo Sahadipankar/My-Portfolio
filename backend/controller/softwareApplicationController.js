@@ -24,11 +24,8 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   );
   
   if (!cloudinaryResponse || cloudinaryResponse.error) {
-    console.error(
-      "Cloudinary Error:",
-      cloudinaryResponse.error || "Unknown Cloudinary error"
-    );
-    return next(new ErrorHandler("Failed to upload avatar to Cloudinary", 500));
+    console.error("Cloudinary Error:", cloudinaryResponse.error || "Unknown Cloudinary error");
+    return next(new ErrorHandler("Failed to upload image to Cloudinary", 500));
   }
   const softwareApplication = await SoftwareApplication.create({
     name,
@@ -39,7 +36,7 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   });
   res.status(201).json({
     success: true,
-    message: "New Software Application Added!",
+    message: "New Software Application Added Successfully!",
     softwareApplication,
   });
 });

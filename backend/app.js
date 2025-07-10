@@ -9,6 +9,7 @@ import messageRouter from "./router/messageRoutes.js";
 import userRouter from "./router/userRoutes.js";
 import timelineRouter from "./router/timelineRoutes.js";
 import applicationRouter from "./router/softwareApplicationRoutes.js"
+import skillRouter from "./router/skillRoutes.js"
 
 
 
@@ -38,6 +39,7 @@ app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/timeline", timelineRouter);
 app.use("/api/v1/software_application", applicationRouter);
+app.use("/api/v1/skill", skillRouter);
 
 
 dbConnection();
