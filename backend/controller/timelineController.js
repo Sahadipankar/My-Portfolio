@@ -1,4 +1,3 @@
-
 // Import required middlewares and models
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js"; // Middleware to catch async errors
 import ErrorHandler from "../middlewares/error.js"; // Custom error handler
@@ -10,9 +9,9 @@ export const postTimeline = catchAsyncErrors(async (req, res, next) => {
   const { title, description, from, to } = req.body;
   // Create new timeline document in the database
   const newTimeline = await Timeline.create({
-    title,
-    description,
-    timeline: { from, to },
+    title, // Title of the timeline event
+    description, // Description of the timeline event
+    timeline: { from, to }, // Timeline period
   });
   // Respond with success and the created timeline
   res.status(200).json({
