@@ -1,4 +1,3 @@
-
 // Import mongoose for MongoDB object modeling
 import mongoose from "mongoose";
 

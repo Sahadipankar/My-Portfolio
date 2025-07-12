@@ -1,4 +1,3 @@
-
 // Import required modules and middlewares
 import { User } from "../models/userSchema.js"; // User model
 import { catchAsyncErrors } from "./catchAsyncErrors.js"; // Middleware to catch async errors

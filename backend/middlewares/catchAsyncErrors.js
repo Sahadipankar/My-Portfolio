@@ -1,4 +1,3 @@
-
 // Middleware to catch errors in async route handlers and pass them to Express error handler
 export const catchAsyncErrors = (theFunction) => {
     return (req, res, next) => {

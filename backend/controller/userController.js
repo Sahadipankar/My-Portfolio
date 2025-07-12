@@ -1,4 +1,3 @@
-
 // Import required middlewares, models, utilities, and libraries
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js"; // Middleware to catch async errors
 import ErrorHandler from "../middlewares/error.js"; // Custom error handler
