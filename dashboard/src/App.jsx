@@ -1,19 +1,31 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import HomePage from './pages/HomePage';
+import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import ManageSkills from './pages/ManageSkills';
+import ManageTimeline from './pages/ManageTimeline';
+import ManageProjects from './pages/ManageProjects';
+import ViewProject from './pages/ViewProject';
+import UpdateProject from './pages/UpdateProject';
+
+
+
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" />
-        <Route path="/login" />
-        <Route path="/forgot/password" />
-        <Route path="/reset/password/:token" />
-        <Route path="/manage/skills" />
-        <Route path="/manage/timeline" />
-        <Route path="/manage/projects" />
-        <Route path="/view/project/:id" />
-        <Route path="/update/project/:id" />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot/password" element={<ForgotPassword />} />
+        <Route path="/reset/password/:token" element={<ResetPassword />} />
+        <Route path="/manage/skills" element={<ManageSkills />} />
+        <Route path="/manage/timeline" element={<ManageTimeline />} />
+        <Route path="/manage/projects" element={<ManageProjects />} />
+        <Route path="/view/project/:id" element={<ViewProject />} />
+        <Route path="/update/project/:id" element={<UpdateProject />} />
       </Routes>
       <ToastContainer position="bottom-right" theme="dark" />
     </Router>
