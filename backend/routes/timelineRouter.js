@@ -1,5 +1,10 @@
 import express from "express";
-import {deleteTimeline, getAllTimelines, postTimeline} from "../controller/timelineController.js";
+import {
+  deleteTimeline,
+  getAllTimelines,
+  postTimeline,
+  // updateTimeline,
+} from "../controller/timelineController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();

@@ -1,5 +1,11 @@
 import express from "express";
-import { addNewProject, deleteProject, getAllProjects, getSingleProject, updateProject } from "../controller/projectController.js";
+import {
+  addNewProject,
+  deleteProject,
+  getAllProjects,
+  getSingleProject,
+  updateProject,
+} from "../controller/projectController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();

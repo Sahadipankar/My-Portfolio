@@ -1,5 +1,10 @@
 import express from "express";
-import { addNewSkill, deleteSkill, getAllSkills, updateSkill } from "../controller/skillController.js";
+import {
+  addNewSkill,
+  deleteSkill,
+  getAllSkills,
+  updateSkill,
+} from "../controller/skillController.js";
 import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
