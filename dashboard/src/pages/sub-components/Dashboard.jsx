@@ -188,10 +188,10 @@ const Dashboard = () => {
                                     {element.title}
                                   </div>
                                 </TableCell>
-                                <TableCell className="hidden md:table-cell">
+                                <TableCell className="hidden md:table-cell font-semibold uppercase">
                                   {element.stack}
                                 </TableCell>
-                                <TableCell className="hidden md:table-cell">
+                                <TableCell className="hidden md:table-cell font-semibold uppercase">
                                   <Badge
                                     className="text-xs"
                                     variant="secondary"
