@@ -21,10 +21,6 @@ import SpecialLoadingButton from "./SpecialLoadingButton";
 import { useNavigate } from "react-router-dom";
 
 const Messages = () => {
-  const navigateTo = useNavigate();
-  const handleReturnToDashboard = () => {
-    navigateTo("/");
-  };
 
   const { messages, loading, error, message } = useSelector(
     (state) => state.messages
@@ -57,9 +53,6 @@ const Messages = () => {
             <Card>
               <CardHeader className="flex gap-4 sm:justify-between sm:flex-row sm:items-center">
                 <CardTitle>Messages</CardTitle>
-                <Button className="w-fit" onClick={handleReturnToDashboard}>
-                  Return to Dashboard
-                </Button>
               </CardHeader>
               <CardContent className="grid sm:grid-cols-2 gap-4">
                 {messages && messages.length > 0 ? (
