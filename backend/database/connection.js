@@ -6,9 +6,9 @@ export const dbConnection = () => {
       dbName: "MY_PORTFOLIO",
     })
     .then(() => {
-      console.log("Connected to database!");
+      console.log("Connected to database Successfully!");
     })
     .catch((err) => {
-      console.log("Some error occured while connecting to database:", err);
+      console.log("Error connecting to database:", err);
     });
 };

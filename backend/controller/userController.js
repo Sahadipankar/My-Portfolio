@@ -213,8 +213,7 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
   const resetPasswordUrl = `${process.env.DASHBOARD_URL}/password/reset/${resetToken}`;
 
-  const message = `Your Reset Password Token is:- \n\n ${resetPasswordUrl}  \n\n If 
-  You've not requested this email then, please ignore it.`;
+  const message = `\nHello! We've received a request to reset your password for your Personal Portfolio Dashboard account. To reset your password, please click the link below or paste it into your browser:\n\n ${resetPasswordUrl}\n\nIf you did not request a password reset, please ignore this email. Your account will remain secure.\n\nThank you,\nPersonal Portfolio Dashboard Team`;
 
   try {
     await sendEmail({
@@ -248,14 +247,14 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
   if (!user) {
     return next(
       new ErrorHandler(
-        "Reset password token is invalid or has been expired.",
+        "Reset password token is invalid or has been expired. Please try again!",
         400
       )
     );
   }
 
   if (req.body.password !== req.body.confirmPassword) {
-    return next(new ErrorHandler("Password & Confirm Password do not match"));
+    return next(new ErrorHandler("Password & Confirm Password do not match!", 400));
   }
   user.password = await req.body.password;
   user.resetPasswordToken = undefined;

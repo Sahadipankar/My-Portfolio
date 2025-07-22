@@ -6,13 +6,13 @@ import { v2 as cloudinary } from "cloudinary";
 export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(
-      new ErrorHandler("Software Application Icon/Image Required!", 404)
+      new ErrorHandler("Software Application Icon/Image Is Required!", 404)
     );
   }
   const { svg } = req.files;
   const { name } = req.body;
   if (!name) {
-    return next(new ErrorHandler("Please Provide Software's Name!", 400));
+    return next(new ErrorHandler("Please Provide The Software's Name!", 400));
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     svg.tempFilePath,
@@ -34,7 +34,7 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   });
   res.status(201).json({
     success: true,
-    message: "New Software Application Added!",
+    message: "New Software Application Added Successfully!",
     softwareApplication,
   });
 });
@@ -43,14 +43,14 @@ export const deleteApplication = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   let softwareApplication = await SoftwareApplication.findById(id);
   if (!softwareApplication) {
-    return next(new ErrorHandler("Already Deleted!", 404));
+    return next(new ErrorHandler("Software Application Not Found. No Software Application Exists With This ID", 404));
   }
   const softwareApplicationSvgId = softwareApplication.svg.public_id;
   await cloudinary.uploader.destroy(softwareApplicationSvgId);
   await softwareApplication.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Software Application Deleted!",
+    message: "Software Application Deleted Successfully!",
   });
 });
 

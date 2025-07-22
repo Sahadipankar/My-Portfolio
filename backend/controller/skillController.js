@@ -5,12 +5,12 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
-    return next(new ErrorHandler("Image For Skill Required!", 404));
+    return next(new ErrorHandler("Image For Skill Is Required!", 404));
   }
   const { svg } = req.files;
   const { title, proficiency } = req.body;
   if (!title || !proficiency) {
-    return next(new ErrorHandler("Please Fill Full Form!", 400));
+    return next(new ErrorHandler("Please Provide All The Required Fields!", 400));
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     svg.tempFilePath,
@@ -33,7 +33,7 @@ export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   });
   res.status(201).json({
     success: true,
-    message: "New Skill Added",
+    message: "New Skill Added Successfully!",
     skill,
   });
 });
@@ -41,21 +41,21 @@ export const deleteSkill = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   let skill = await Skill.findById(id);
   if (!skill) {
-    return next(new ErrorHandler("Already Deleted!", 404));
+    return next(new ErrorHandler("Skill Not Found. No Skill Exists With This ID", 404));
   }
   const skillSvgId = skill.svg.public_id;
   await cloudinary.uploader.destroy(skillSvgId);
   await skill.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Skill Deleted!",
+    message: "Skill Deleted Successfully!",
   });
 });
 export const updateSkill = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   let skill = await Skill.findById(id);
   if (!skill) {
-    return next(new ErrorHandler("Skill not found!", 404));
+    return next(new ErrorHandler("Skill Not Found. No Skill Exists With This ID", 404));
   }
   const { proficiency } = req.body;
   skill = await Skill.findByIdAndUpdate(
@@ -69,7 +69,7 @@ export const updateSkill = catchAsyncErrors(async (req, res, next) => {
   );
   res.status(200).json({
     success: true,
-    message: "Skill Updated!",
+    message: "Skill Updated Successfully!",
     skill,
   });
 });

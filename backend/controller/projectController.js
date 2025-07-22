@@ -5,7 +5,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const addNewProject = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
-    return next(new ErrorHandler("Project Banner Image Required!", 404));
+    return next(new ErrorHandler("Project Banner Image Is Required!", 404));
   }
   const { projectBanner } = req.files;
   const {
@@ -26,7 +26,7 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
     !technologies ||
     !deployed
   ) {
-    return next(new ErrorHandler("Please Provide All Details!", 400));
+    return next(new ErrorHandler("Please Provide All The Required Fields!", 400));
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     projectBanner.tempFilePath,
@@ -48,13 +48,13 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
     technologies,
     deployed,
     projectBanner: {
-      public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
-      url: cloudinaryResponse.secure_url, // Set your cloudinary secure_url here
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
     },
   });
   res.status(201).json({
     success: true,
-    message: "New Project Added!",
+    message: "New Project Added Successfully!",
     project,
   });
 });
@@ -96,7 +96,7 @@ export const updateProject = catchAsyncErrors(async (req, res, next) => {
   );
   res.status(200).json({
     success: true,
-    message: "Project Updated!",
+    message: "Project Updated Successfully!",
     project,
   });
 });
@@ -105,14 +105,14 @@ export const deleteProject = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   const project = await Project.findById(id);
   if (!project) {
-    return next(new ErrorHandler("Already Deleted!", 404));
+    return next(new ErrorHandler("Project Not Found. No Project Exists With This ID", 404));
   }
   const projectImageId = project.projectBanner.public_id;
   await cloudinary.uploader.destroy(projectImageId);
   await project.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Project Deleted!",
+    message: "Project Deleted Successfully!",
   });
 });
 
