@@ -34,6 +34,9 @@ app.use(
   })
 );
 
+console.log("Allowed origins:", process.env.PORTFOLIO_URL, process.env.DASHBOARD_URL);
+
+
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/timeline", timelineRouter);
 app.use("/api/v1/message", messageRouter);
