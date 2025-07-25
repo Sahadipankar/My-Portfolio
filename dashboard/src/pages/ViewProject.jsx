@@ -15,11 +15,13 @@ const ViewProject = () => {
   const [projectBanner, setProjectBanner] = useState("");
 
   const { id } = useParams();
+  const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 
   useEffect(() => {
     const getProject = async () => {
       await axios
-        .get(`http://localhost:5000/api/v1/project/get/${id}`, {
+        .get(`${baseUrl}/api/v1/project/get/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

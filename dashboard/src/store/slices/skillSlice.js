@@ -83,11 +83,13 @@ const skillSlice = createSlice({
   },
 });
 
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 export const getAllSkills = () => async (dispatch) => {
   dispatch(skillSlice.actions.getAllSkillsRequest());
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/skill/getall",
+      `${baseUrl}/api/v1/skill/getall`,
       { withCredentials: true }
     );
     dispatch(skillSlice.actions.getAllSkillsSuccess(response.data.skills));
@@ -103,7 +105,7 @@ export const addNewSkill = (data) => async (dispatch) => {
   dispatch(skillSlice.actions.addNewSkillRequest());
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/v1/skill/add",
+      `${baseUrl}/api/v1/skill/add`,
       data,
       {
         withCredentials: true,
@@ -123,7 +125,7 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
   dispatch(skillSlice.actions.updateSkillRequest());
   try {
     const response = await axios.put(
-      `http://localhost:5000/api/v1/skill/update/${id}`,
+      `${baseUrl}/api/v1/skill/update/${id}`,
       { proficiency },
       {
         withCredentials: true,
@@ -141,7 +143,7 @@ export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const response = await axios.delete(
-      `http://localhost:5000/api/v1/skill/delete/${id}`,
+      `${baseUrl}/api/v1/skill/delete/${id}`,
       {
         withCredentials: true,
       }

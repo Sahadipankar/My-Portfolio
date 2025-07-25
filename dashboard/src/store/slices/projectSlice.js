@@ -88,7 +88,7 @@ export const getAllProjects = () => async (dispatch) => {
   dispatch(projectSlice.actions.getAllProjectsRequest());
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/project/getall",
+      `${baseUrl}/api/v1/project/getall`,
       { withCredentials: true }
     );
     dispatch(
@@ -102,11 +102,13 @@ export const getAllProjects = () => async (dispatch) => {
   }
 };
 
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 export const addNewProject = (data) => async (dispatch) => {
   dispatch(projectSlice.actions.addNewProjectRequest());
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/v1/project/add",
+      `${baseUrl}/api/v1/project/add`,
       data,
       {
         withCredentials: true,
@@ -125,7 +127,7 @@ export const deleteProject = (id) => async (dispatch) => {
   dispatch(projectSlice.actions.deleteProjectRequest());
   try {
     const response = await axios.delete(
-      `http://localhost:5000/api/v1/project/delete/${id}`,
+      `${baseUrl}/api/v1/project/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -142,7 +144,7 @@ export const updateProject = (id, newData) => async (dispatch) => {
   dispatch(projectSlice.actions.updateProjectRequest());
   try {
     const response = await axios.put(
-      `http://localhost:5000/api/v1/project/update/${id}`,
+      `${baseUrl}/api/v1/project/update/${id}`,
       newData,
       {
         withCredentials: true,

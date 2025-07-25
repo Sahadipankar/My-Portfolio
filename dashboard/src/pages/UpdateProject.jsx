@@ -21,6 +21,8 @@ import {
 } from "@/store/slices/projectSlice";
 import { Button } from "@/components/ui/button";
 
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 const UpdateProject = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -49,7 +51,7 @@ const UpdateProject = () => {
   useEffect(() => {
     const getProject = async () => {
       await axios
-        .get(`http://localhost:5000/api/v1/project/get/${id}`, {
+        .get(`${baseUrl}/api/v1/project/get/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

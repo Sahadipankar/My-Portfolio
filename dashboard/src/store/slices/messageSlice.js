@@ -53,11 +53,13 @@ const messageSlice = createSlice({
   },
 });
 
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 export const getAllMessages = () => async (dispatch) => {
   dispatch(messageSlice.actions.getAllMessagesRequest());
   try {
     const response = await axios.get(
-      "http://localhost:5000/api/v1/message/getall",
+      `${baseUrl}/api/v1/message/getall`,
       { withCredentials: true }
     );
     dispatch(
@@ -75,7 +77,7 @@ export const deleteMessage = (id) => async (dispatch) => {
   dispatch(messageSlice.actions.deleteMessageRequest());
   try {
     const response = await axios.delete(
-      `http://localhost:5000/api/v1/message/delete/${id}`,
+      `${baseUrl}/api/v1/message/delete/${id}`,
       {
         withCredentials: true,
       }
