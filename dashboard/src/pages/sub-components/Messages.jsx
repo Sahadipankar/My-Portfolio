@@ -20,7 +20,6 @@ import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
 
 const Messages = () => {
-
   const { messages, loading, error, message } = useSelector(
     (state) => state.messages
   );
