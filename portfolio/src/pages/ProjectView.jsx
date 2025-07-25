@@ -19,7 +19,7 @@ const ProjectView = () => {
   useEffect(() => {
     const getProject = async () => {
       await axios
-        .get(`http://localhost:5000/api/v1/project/get/${id}`, {
+        .get(`${import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL}/api/v1/project/get/${id}`, {
           withCredentials: true,
         })
         .then((res) => {
