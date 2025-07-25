@@ -142,6 +142,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
       avatar.tempFilePath,
       {
         folder: "MY PORTFOLIO/PORTFOLIO AVATAR",
+        public_id: `New_Profile_Image_${currentDate}`,
       }
     );
     newUserData.avatar = {
@@ -159,6 +160,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     }
     const newResume = await cloudinary.uploader.upload(resume.tempFilePath, {
       folder: "MY PORTFOLIO/PORTFOLIO RESUME",
+      public_id: `New_Resume_Image_${currentDate}`,
     });
     newUserData.resume = {
       public_id: newResume.public_id,
