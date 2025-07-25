@@ -2,6 +2,9 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { SoftwareApplication } from "../models/softwareApplicationSchema.js";
 import { v2 as cloudinary } from "cloudinary";
+import { getCurrentDate } from "../utils/getCurrentDate.js";
+
+const currentDate = getCurrentDate();
 
 export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -16,7 +19,10 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     svg.tempFilePath,
-    { folder: "MY PORTFOLIO/SOFTWARE IMAGES" }
+    {
+      folder: "MY PORTFOLIO/SOFTWARE IMAGES",
+      public_id: `Software_Image_${currentDate}`
+    }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(

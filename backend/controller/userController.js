@@ -5,6 +5,9 @@ import ErrorHandler from "../middlewares/error.js";
 import { generateToken } from "../utils/jwtToken.js";
 import crypto from "crypto";
 import { sendEmail } from "../utils/sendEmail.js";
+import { getCurrentDate } from "../utils/getCurrentDate.js";
+
+const currentDate = getCurrentDate();
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -15,7 +18,10 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   //POSTING AVATAR
   const cloudinaryResponseForAvatar = await cloudinary.uploader.upload(
     avatar.tempFilePath,
-    { folder: "MY PORTFOLIO/PORTFOLIO AVATAR" }
+    {
+      folder: "MY PORTFOLIO/PORTFOLIO AVATAR",
+      public_id: `Profile_Image_${currentDate}`
+    }
   );
   if (!cloudinaryResponseForAvatar || cloudinaryResponseForAvatar.error) {
     console.error(
@@ -28,7 +34,10 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   //POSTING RESUME
   const cloudinaryResponseForResume = await cloudinary.uploader.upload(
     resume.tempFilePath,
-    { folder: "MY PORTFOLIO/PORTFOLIO RESUME" }
+    {
+      folder: "MY PORTFOLIO/PORTFOLIO RESUME",
+      public_id: `Resume_Image_${currentDate}`
+    }
   );
   if (!cloudinaryResponseForResume || cloudinaryResponseForResume.error) {
     console.error(
@@ -63,12 +72,12 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     facebookURL,
     linkedInURL,
     avatar: {
-      public_id: cloudinaryResponseForAvatar.public_id, 
-      url: cloudinaryResponseForAvatar.secure_url, 
+      public_id: cloudinaryResponseForAvatar.public_id,
+      url: cloudinaryResponseForAvatar.secure_url,
     },
     resume: {
-      public_id: cloudinaryResponseForResume.public_id, 
-      url: cloudinaryResponseForResume.secure_url, 
+      public_id: cloudinaryResponseForResume.public_id,
+      url: cloudinaryResponseForResume.secure_url,
     },
   });
   generateToken(user, "User Registered Successfully!", 201, res);

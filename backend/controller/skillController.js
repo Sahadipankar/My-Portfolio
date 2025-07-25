@@ -2,6 +2,9 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Skill } from "../models/skillSchema.js";
 import { v2 as cloudinary } from "cloudinary";
+import { getCurrentDate } from "../utils/getCurrentDate.js";
+
+const currentDate = getCurrentDate();
 
 export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -14,7 +17,10 @@ export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     svg.tempFilePath,
-    { folder: "MY PORTFOLIO/SKILL IMAGES" }
+    {
+      folder: "MY PORTFOLIO/SKILL IMAGES",
+      public_id: `Skill_Image_${currentDate}`
+    }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(

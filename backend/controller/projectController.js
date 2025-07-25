@@ -2,6 +2,9 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { Project } from "../models/projectSchema.js";
 import { v2 as cloudinary } from "cloudinary";
+import { getCurrentDate } from "../utils/getCurrentDate.js";
+
+const currentDate = getCurrentDate();
 
 export const addNewProject = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -30,7 +33,10 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
     projectBanner.tempFilePath,
-    { folder: "MY PORTFOLIO/PROJECT IMAGES" }
+    {
+      folder: "MY PORTFOLIO/PROJECT IMAGES",
+      public_id: `Project_Image_${currentDate}`
+    }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(
@@ -78,6 +84,7 @@ export const updateProject = catchAsyncErrors(async (req, res, next) => {
       projectBanner.tempFilePath,
       {
         folder: "MY PORTFOLIO/PROJECT IMAGES",
+        public_id: `Project_Image_${currentDate}`
       }
     );
     newProjectData.projectBanner = {
