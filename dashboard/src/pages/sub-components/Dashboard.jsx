@@ -125,7 +125,7 @@ const Dashboard = () => {
               <Card className="sm:col-span-2">
                 <CardHeader className="pb-3">
                   <CardDescription className="max-w-lg text-balance leading-relaxed">
-                    {user.aboutMe}
+                    {user && user.aboutMe ? user.aboutMe : ""}
                   </CardDescription>
                 </CardHeader>
                 <CardFooter>
@@ -136,7 +136,7 @@ const Dashboard = () => {
                 <CardHeader className="pb-2">
                   <CardTitle>Projects Completed</CardTitle>
                   <CardTitle className="text-6xl">
-                    {projects && projects.length}
+                    {Array.isArray(projects) ? projects.length : 0}
                   </CardTitle>
                 </CardHeader>
                 <CardFooter>
@@ -147,7 +147,7 @@ const Dashboard = () => {
                 <CardHeader className="pb-2">
                   <CardTitle>Skills</CardTitle>
                   <CardTitle className="text-6xl">
-                    {skills && skills.length}
+                    {Array.isArray(skills) ? skills.length : 0}
                   </CardTitle>
                 </CardHeader>
                 <CardFooter>
@@ -272,7 +272,7 @@ const Dashboard = () => {
                       </TableHeader>
                       <TableBody>
                         {softwareApplications &&
-                        softwareApplications.length > 0 ? (
+                          softwareApplications.length > 0 ? (
                           softwareApplications.map((element) => {
                             return (
                               <TableRow className="bg-accent" key={element._id}>
