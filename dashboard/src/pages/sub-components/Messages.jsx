@@ -20,9 +20,11 @@ import { toast } from "react-toastify";
 import SpecialLoadingButton from "./SpecialLoadingButton";
 
 const Messages = () => {
-  const { messages, loading, error, message } = useSelector(
-    (state) => state.messages
-  );
+  // Try both 'messages' and 'message' slice for compatibility
+  const messagesState = useSelector((state) => state.messages || state.message);
+  const { messages, loading, error, message } = messagesState || {};
+  // Debug log to check actual state
+  console.log('Messages state:', messagesState);
 
   const [messageId, setMessageId] = useState("");
   const handleMessageDelete = (id) => {
@@ -31,8 +33,13 @@ const Messages = () => {
   };
 
   const dispatch = useDispatch();
+  // Only fetch messages on mount
   useEffect(() => {
     dispatch(getAllMessages());
+  }, [dispatch]);
+
+  // Handle error and success notifications
+  useEffect(() => {
     if (error) {
       toast.error(error);
       dispatch(clearAllMessageErrors());
@@ -42,7 +49,7 @@ const Messages = () => {
       dispatch(resetMessagesSlice());
       dispatch(getAllMessages());
     }
-  }, [dispatch, error, message, loading]);
+  }, [dispatch, error, message]);
 
   return (
     <div className="min-h-[100vh] sm:gap-4 sm:py-4 sm:pl-20">
