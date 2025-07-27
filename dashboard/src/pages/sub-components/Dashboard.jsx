@@ -230,7 +230,7 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 {skills && skills.length > 0 ? (
-                  ["frontend", "backend", "programming languages", "database", "tools", "libraries"].map((cat) => (
+                  ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
                     <div key={cat} className="mb-6">
                       <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
                       <div className="grid sm:grid-cols-2 gap-4">
