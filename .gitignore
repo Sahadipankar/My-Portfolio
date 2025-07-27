@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+react_portfolio
 
 config
 .env
@@ -26,5 +27,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-react_portfolio
