@@ -55,6 +55,7 @@ const Portfolio = () => {
                   <img
                     src={element.projectBanner && element.projectBanner.url}
                     alt={element.title}
+                    className="w-48 h-32 object-cover rounded-lg border"
                   />
                   <p className="mt-2 text-center font-semibold">{element.title}</p>
                 </div>
@@ -69,6 +70,7 @@ const Portfolio = () => {
                   <img
                     src={element.projectBanner && element.projectBanner.url}
                     alt={element.title}
+                    className="w-48 h-32 object-cover rounded-lg border"
                   />
                   <p className="mt-2 text-center font-semibold">{element.title}</p>
                 </div>
