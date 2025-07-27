@@ -199,7 +199,7 @@ const AddProject = () => {
                       <input
                         type="text"
                         className="block flex-1 border-0 bg-transparent py-1.5 pl-8 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="Github Repository Link"
+                        placeholder="Your Project Link"
                         value={projectLink}
                         onChange={(e) => setProjectLink(e.target.value)}
                       />
