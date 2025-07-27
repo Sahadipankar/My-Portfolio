@@ -13,7 +13,7 @@ import SpecialLoadingButton from "./SpecialLoadingButton";
 const AddSkill = () => {
   const [title, setTitle] = useState("");
   const [proficiency, setProficiency] = useState("");
-  const [category, setCategory] = useState("others");
+  const [category, setCategory] = useState("frontend");
   const [svg, setSvg] = useState("");
   const [svgPreview, setSvgPreview] = useState("");
 
@@ -110,7 +110,8 @@ const AddSkill = () => {
                       <option value="frontend">Frontend</option>
                       <option value="backend">Backend</option>
                       <option value="database">Database</option>
-                      <option value="others">Others</option>
+                      <option value="tools">Tools</option>
+                      <option value="libraries">Libraries</option>
                     </select>
                   </div>
                 </div>

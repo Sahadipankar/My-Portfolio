@@ -36,6 +36,7 @@ const ManageSkills = () => {
   const { loading, skills, error, message } = useSelector(
     (state) => state.skill
   );
+  const skillCategories = ["programming languages", "frontend", "backend", "database", "tools", "libraries"];
   const dispatch = useDispatch();
 
   const [newProficiency, setNewProficiency] = useState(1);
@@ -74,38 +75,47 @@ const ManageSkills = () => {
                 Return to Dashboard
               </Button>
             </CardHeader>
-            <CardContent className="grid sm:grid-cols-2 gap-4">
-              {skills.map((element) => {
-                return (
-                  <Card key={element._id}>
-                    <CardHeader className="text-3xl font-bold flex items-center justify-between flex-row">
-                      {element.title}
-                      <TooltipProvider>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Trash2
-                              onClick={() => handleDeleteSkill(element._id)}
-                              className="h-5 w-5 hover:text-red-500"
+            <CardContent>
+              {skillCategories.map((cat) => (
+                <div key={cat} className="mb-8">
+                  <h2 className="text-xl font-bold mb-4 capitalize">{cat}</h2>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {skills && skills.filter((s) => s.category === cat).length > 0 ? (
+                      skills.filter((s) => s.category === cat).map((element) => (
+                        <Card key={element._id}>
+                          <CardHeader className="text-3xl font-bold flex items-center justify-between flex-row">
+                            {element.title}
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Trash2
+                                    onClick={() => handleDeleteSkill(element._id)}
+                                    className="h-5 w-5 hover:text-red-500"
+                                  />
+                                </TooltipTrigger>
+                                <TooltipContent side="right" style={{ color: "red" }}>
+                                  Delete
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                          </CardHeader>
+                          <CardFooter>
+                            <Label className="text-2xl mr-2">Proficiency:</Label>
+                            <Input
+                              type="number"
+                              defaultValue={element.proficiency}
+                              onChange={(e) => handleInputChange(e.target.value)}
+                              onBlur={() => handleUpdateSkill(element._id)}
                             />
-                          </TooltipTrigger>
-                          <TooltipContent side="right" style={{ color: "red" }}>
-                            Delete
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    </CardHeader>
-                    <CardFooter>
-                      <Label className="text-2xl mr-2">Proficiency:</Label>
-                      <Input
-                        type="number"
-                        defaultValue={element.proficiency}
-                        onChange={(e) => handleInputChange(e.target.value)}
-                        onBlur={() => handleUpdateSkill(element._id)}
-                      />
-                    </CardFooter>
-                  </Card>
-                );
-              })}
+                          </CardFooter>
+                        </Card>
+                      ))
+                    ) : (
+                      <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
+                    )}
+                  </div>
+                </div>
+              ))}
             </CardContent>
           </Card>
         </TabsContent>
