@@ -26,7 +26,7 @@ const Hero = () => {
     getMyProfile();
   }, []);
   return (
-    <div className="w-full -mt-5">
+    <div className="w-full -mt-7">
       <div className="flex items-center gap-2 mb-2">
         <span className="bg-green-400 rounded-full h-2 w-2"></span>
         <p>Online</p>
