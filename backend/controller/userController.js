@@ -7,8 +7,6 @@ import crypto from "crypto";
 import { sendEmail } from "../utils/sendEmail.js";
 import { getCurrentDate } from "../utils/getCurrentDate.js";
 
-const currentDate = getCurrentDate();
-
 export const register = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Avatar Required!", 400));
@@ -20,7 +18,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     avatar.tempFilePath,
     {
       folder: "MY PORTFOLIO/PORTFOLIO AVATAR",
-      public_id: `Profile_Image_${currentDate}`
+      public_id: `Profile_Image_${getCurrentDate()}`
     }
   );
   if (!cloudinaryResponseForAvatar || cloudinaryResponseForAvatar.error) {
@@ -36,7 +34,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     resume.tempFilePath,
     {
       folder: "MY PORTFOLIO/PORTFOLIO RESUME",
-      public_id: `Resume_Image_${currentDate}`
+      public_id: `Resume_Image_${getCurrentDate()}`
     }
   );
   if (!cloudinaryResponseForResume || cloudinaryResponseForResume.error) {
@@ -144,7 +142,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
       avatar.tempFilePath,
       {
         folder: "MY PORTFOLIO/PORTFOLIO AVATAR",
-        public_id: `New_Profile_Image_${currentDate}`,
+        public_id: `New_Profile_Image_${getCurrentDate()}`,
       }
     );
     newUserData.avatar = {
@@ -162,7 +160,7 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
     }
     const newResume = await cloudinary.uploader.upload(resume.tempFilePath, {
       folder: "MY PORTFOLIO/PORTFOLIO RESUME",
-      public_id: `New_Resume_Image_${currentDate}`,
+      public_id: `New_Resume_Image_${getCurrentDate()}`,
     });
     newUserData.resume = {
       public_id: newResume.public_id,

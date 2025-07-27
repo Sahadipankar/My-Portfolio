@@ -4,8 +4,6 @@ import { SoftwareApplication } from "../models/softwareApplicationSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { getCurrentDate } from "../utils/getCurrentDate.js";
 
-const currentDate = getCurrentDate();
-
 export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(
@@ -21,7 +19,7 @@ export const addNewApplication = catchAsyncErrors(async (req, res, next) => {
     svg.tempFilePath,
     {
       folder: "MY PORTFOLIO/SOFTWARE IMAGES",
-      public_id: `Software_Image_${currentDate}`
+      public_id: `Software_Image_${getCurrentDate()}`
     }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {

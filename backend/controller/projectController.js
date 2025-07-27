@@ -4,8 +4,6 @@ import { Project } from "../models/projectSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { getCurrentDate } from "../utils/getCurrentDate.js";
 
-const currentDate = getCurrentDate();
-
 export const addNewProject = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Project Banner Image Is Required!", 404));
@@ -35,7 +33,7 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
     projectBanner.tempFilePath,
     {
       folder: "MY PORTFOLIO/PROJECT IMAGES",
-      public_id: `Project_Image_${currentDate}`
+      public_id: `Project_Image_${getCurrentDate()}`
     }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {

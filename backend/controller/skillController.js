@@ -4,8 +4,6 @@ import { Skill } from "../models/skillSchema.js";
 import { v2 as cloudinary } from "cloudinary";
 import { getCurrentDate } from "../utils/getCurrentDate.js";
 
-const currentDate = getCurrentDate();
-
 export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Image For Skill Is Required!", 404));
@@ -19,7 +17,7 @@ export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
     svg.tempFilePath,
     {
       folder: "MY PORTFOLIO/SKILL IMAGES",
-      public_id: `Skill_Image_${currentDate}`
+      public_id: `Skill_Image_${getCurrentDate()}`
     }
   );
   if (!cloudinaryResponse || cloudinaryResponse.error) {
