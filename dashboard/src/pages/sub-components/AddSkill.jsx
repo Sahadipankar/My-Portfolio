@@ -13,6 +13,7 @@ import SpecialLoadingButton from "./SpecialLoadingButton";
 const AddSkill = () => {
   const [title, setTitle] = useState("");
   const [proficiency, setProficiency] = useState("");
+  const [category, setCategory] = useState("others");
   const [svg, setSvg] = useState("");
   const [svgPreview, setSvgPreview] = useState("");
 
@@ -29,9 +30,11 @@ const AddSkill = () => {
   const { loading, message, error } = useSelector((state) => state.skill);
   const dispatch = useDispatch();
   const handleAddNewSkill = (e) => {
+    e && e.preventDefault();
     const formData = new FormData();
     formData.append("title", title);
     formData.append("proficiency", proficiency);
+    formData.append("category", category);
     formData.append("svg", svg);
     dispatch(addNewSkill(formData));
   };
@@ -91,6 +94,24 @@ const AddSkill = () => {
                         onChange={(e) => setProficiency(e.target.value)}
                       />
                     </div>
+                  </div>
+                </div>
+                <div className="w-full sm:col-span-4">
+                  <label className="block text-sm font-medium leading-6 text-gray-900">
+                    Category
+                  </label>
+                  <div className="mt-2">
+                    <select
+                      className="block w-full border-0 bg-transparent py-1.5 pl-1 text-gray-900 focus:ring-0 sm:text-sm sm:leading-6 ring-1 ring-inset ring-gray-300 rounded-md"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option value="programming languages">Programming Languages</option>
+                      <option value="frontend">Frontend</option>
+                      <option value="backend">Backend</option>
+                      <option value="database">Database</option>
+                      <option value="others">Others</option>
+                    </select>
                   </div>
                 </div>
 

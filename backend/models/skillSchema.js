@@ -7,6 +7,12 @@ const skillSchema = new mongoose.Schema({
   proficiency: {
     type: Number,
   },
+  category: {
+    type: String,
+    enum: ["frontend", "backend", "programming languages", "database", "others"],
+    default: "others",
+    required: true,
+  },
   svg: {
     public_id: {
       type: String,

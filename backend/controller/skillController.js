@@ -9,8 +9,8 @@ export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Image For Skill Is Required!", 404));
   }
   const { svg } = req.files;
-  const { title, proficiency } = req.body;
-  if (!title || !proficiency) {
+  const { title, proficiency, category } = req.body;
+  if (!title || !proficiency || !category) {
     return next(new ErrorHandler("Please Provide All The Required Fields!", 400));
   }
   const cloudinaryResponse = await cloudinary.uploader.upload(
@@ -30,6 +30,7 @@ export const addNewSkill = catchAsyncErrors(async (req, res, next) => {
   const skill = await Skill.create({
     title,
     proficiency,
+    category,
     svg: {
       public_id: cloudinaryResponse.public_id, // Set your cloudinary public_id here
       url: cloudinaryResponse.secure_url, // Set your cloudinary secure_url here
