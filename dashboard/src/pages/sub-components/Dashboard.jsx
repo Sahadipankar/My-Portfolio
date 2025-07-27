@@ -230,12 +230,12 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 {skills && skills.length > 0 ? (
-                  ["programming languages", "frontend", "backend", "database", "others"].map((cat) => (
+                  ["frontend", "backend", "programming languages", "database", "tools", "libraries"].map((cat) => (
                     <div key={cat} className="mb-6">
                       <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
                       <div className="grid sm:grid-cols-2 gap-4">
-                        {skills.filter((s) => (cat === "programming languages" ? s.category === "programming languages" : cat === "others" ? s.category === "others" : s.category === cat)).length > 0 ? (
-                          skills.filter((s) => (cat === "programming languages" ? s.category === "programming languages" : cat === "others" ? s.category === "others" : s.category === cat)).map((element) => (
+                        {skills.filter((s) => s.category === cat).length > 0 ? (
+                          skills.filter((s) => s.category === cat).map((element) => (
                             <Card key={element._id}>
                               <CardHeader>{element.title}</CardHeader>
                               <CardFooter>
