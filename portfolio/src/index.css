@@ -73,11 +73,5 @@
 
   body {
     @apply bg-background text-foreground;
-    transform: scale(0.9);
-    transform-origin: top left;
-    width: 110vw;
-    /* Compensate for scaling */
-    height: 125vh;
-    overflow-x: auto;
   }
 }
