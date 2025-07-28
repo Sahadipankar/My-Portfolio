@@ -26,7 +26,7 @@ const Hero = () => {
     getMyProfile();
   }, []);
   return (
-    <div className="w-full -mt-7">
+    <div className="w-full -mt-3">
       <div className="flex items-center gap-2 mb-2">
         <span className="bg-green-400 rounded-full h-2 w-2"></span>
         <p>Online</p>
@@ -75,7 +75,7 @@ const Hero = () => {
             <span>Github</span>
           </Button>
         </Link>
-        <Link to={"https://drive.google.com/file/d/1-h9szNFvPiZ5uABj7K7OU-wgLrOWuYPb/view?usp=sharing"} target="_blank">
+        <Link to={user.resume && user.resume.url} target="_blank">
           <Button className="rounded-[30px] flex items-center gap-2 flex-row">
             <span>
               <ExternalLink />

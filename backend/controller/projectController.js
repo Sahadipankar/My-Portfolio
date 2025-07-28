@@ -82,7 +82,7 @@ export const updateProject = catchAsyncErrors(async (req, res, next) => {
       projectBanner.tempFilePath,
       {
         folder: "MY PORTFOLIO/PROJECT IMAGES",
-        public_id: `Project_Image_${getCurrentDate()}`
+        public_id: `New_Project_Image_${getCurrentDate()}`
       }
     );
     newProjectData.projectBanner = {

@@ -22,7 +22,7 @@ const Skills = () => {
       </h1>
       {["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => {
         return (
-          <div key={cat} className="mb-8">
+          <div key={cat} className="mb-5">
             <h2 className="text-xl font-bold mb-4 capitalize">{cat}</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {skills && skills.filter((s) => s.category === cat).length > 0 ? (
@@ -39,7 +39,7 @@ const Skills = () => {
                   </Card>
                 ))
               ) : (
-                <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
+                <p className="text-lg text-muted-foreground">No {cat} skill added.</p>
               )}
             </div>
           </div>

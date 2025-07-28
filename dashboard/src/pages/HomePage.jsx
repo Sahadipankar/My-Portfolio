@@ -10,6 +10,8 @@ import {
   PanelLeft,
   PencilRuler,
   User,
+  GraduationCap,
+  Briefcase,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -30,9 +32,11 @@ import { logout } from "@/store/slices/userSlice";
 import { toast } from "react-toastify";
 import Messages from "./sub-components/Messages";
 import AddTimeline from "./sub-components/AddTimeline";
+import AddExperience from "./sub-components/AddExperience";
 
 const HomePage = () => {
   const [active, setActive] = useState("Dashboard");
+  const [menuOpen, setMenuOpen] = useState(false);
   const { isAuthenticated, error, user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -62,8 +66,8 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Dashboard"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Dashboard")}
                 >
@@ -80,8 +84,8 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Project"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Add Project")}
                 >
@@ -98,8 +102,8 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Skill"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Add Skill")}
                 >
@@ -116,16 +120,16 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Uses"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Add Uses")}
                 >
                   <LayoutGrid className="h-5 w-5" />
-                  <span className="sr-only">Add Uses</span>
+                  <span className="sr-only">Add Software</span>
                 </Link>
               </TooltipTrigger>
-              <TooltipContent side="right">Add Uses</TooltipContent>
+              <TooltipContent side="right">Add Software</TooltipContent>
             </Tooltip>
           </TooltipProvider>
           <TooltipProvider>
@@ -133,12 +137,12 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Timeline"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Add Timeline")}
                 >
-                  <History className="h-5 w-5" />
+                  <GraduationCap className="h-5 w-5" />
                   <span className="sr-only">Add Timeline</span>
                 </Link>
               </TooltipTrigger>
@@ -149,9 +153,26 @@ const HomePage = () => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
+                  className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Add Experience"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
+                    }  transition-colors hover:text-foreground md:h-8 md:w-8`}
+                  onClick={() => setActive("Add Experience")}
+                >
+                  <Briefcase className="h-5 w-5" />
+                  <span className="sr-only">Add Experience</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">Add Experience</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Messages"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Messages")}
                 >
@@ -167,8 +188,8 @@ const HomePage = () => {
               <TooltipTrigger asChild>
                 <Link
                   className={`flex h-9 w-9 items-center justify-center rounded-lg ${active === "Account"
-                      ? "text-accent-foreground bg-accent"
-                      : "text-muted-foreground"
+                    ? "text-accent-foreground bg-accent"
+                    : "text-muted-foreground"
                     }  transition-colors hover:text-foreground md:h-8 md:w-8`}
                   onClick={() => setActive("Account")}
                 >
@@ -198,9 +219,9 @@ const HomePage = () => {
         </nav>
       </aside>
       <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6 max-[900px]:h-[100px]">
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild>
-            <Button size="icon" variant="outline" className="sm:hidden">
+            <Button size="icon" variant="outline" className="sm:hidden" onClick={() => setMenuOpen(true)}>
               <PanelLeft className="h-5 w-5" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
@@ -216,79 +237,89 @@ const HomePage = () => {
               <Link
                 href="#"
                 className={`flex items-center gap-4 px-2.5 ${active === "Dashboard"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Dashboard")}
+                onClick={() => { setActive("Dashboard"); setMenuOpen(false); }}
               >
                 <Home className="h-5 w-5" />
                 Dashboard
               </Link>
               <Link
                 className={`flex items-center gap-4 px-2.5 ${active === "Add Project"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Add Project")}
+                onClick={() => { setActive("Add Project"); setMenuOpen(false); }}
               >
                 <FolderGit className="h-5 w-5" />
                 Add Project
               </Link>
               <Link
                 className={`flex items-center gap-4 px-2.5 ${active === "Add Skill"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Add Skill")}
+                onClick={() => { setActive("Add Skill"); setMenuOpen(false); }}
               >
                 <PencilRuler className="h-5 w-5" />
                 Add Skill
               </Link>
               <Link
                 className={`flex items-center gap-4 px-2.5 ${active === "Add Uses"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Add Uses")}
+                onClick={() => { setActive("Add Uses"); setMenuOpen(false); }}
               >
                 <LayoutGrid className="h-5 w-5" />
-                Add Uses
-              </Link>
-              <Link
-                className={`flex items-center gap-4 px-2.5 ${active === "Profile"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
-                  }`}
-                onClick={() => setActive("Account")}
-              >
-                <User className="h-5 w-5" />
-                Account
+                Add Software
               </Link>
               <Link
                 className={`flex items-center gap-4 px-2.5 ${active === "Timeline"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Timeline")}
+                onClick={() => { setActive("Timeline"); setMenuOpen(false); }}
               >
                 <History className="h-5 w-5" />
                 Timeline
               </Link>
               <Link
-                className={`flex items-center gap-4 px-2.5 ${active === "Messages"
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground "
+                className={`flex items-center gap-4 px-2.5 ${active === "Add Experience"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
                   }`}
-                onClick={() => setActive("Messages")}
+                onClick={() => { setActive("Add Experience"); setMenuOpen(false); }}
+              >
+                <History className="h-5 w-5" />
+                Add Experience
+              </Link>
+              <Link
+                className={`flex items-center gap-4 px-2.5 ${active === "Messages"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
+                  }`}
+                onClick={() => { setActive("Messages"); setMenuOpen(false); }}
               >
                 <MessageSquareMore className="h-5 w-5" />
                 Messages
               </Link>
               <Link
+                className={`flex items-center gap-4 px-2.5 ${active === "Profile"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground "
+                  }`}
+                onClick={() => { setActive("Account"); setMenuOpen(false); }}
+              >
+                <User className="h-5 w-5" />
+                Account
+              </Link>
+              <Link
                 className={
                   "flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 }
-                onClick={handleLogout}
+                onClick={() => { handleLogout(); setMenuOpen(false); }}
               >
                 <LogOut className="h-5 w-5" />
                 Logout
@@ -327,6 +358,9 @@ const HomePage = () => {
             break;
           case "Messages":
             return <Messages />;
+            break;
+          case "Add Experience":
+            return <AddExperience />;
             break;
           case "Account":
             return <Account />;

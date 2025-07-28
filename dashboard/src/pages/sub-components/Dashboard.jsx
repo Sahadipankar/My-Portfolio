@@ -25,6 +25,7 @@ import {
   getAllSoftwareApplications,
   resetSoftwareApplicationSlice,
 } from "@/store/slices/softwareApplicationSlice";
+import { getAllExperiences } from "@/store/slices/experienceSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -72,6 +73,8 @@ const Dashboard = () => {
   const { projects, error: projectError } = useSelector(
     (state) => state.project
   );
+  // Add experiences selector for dashboard experience table
+  const { experiences } = useSelector((state) => state.experience);
 
   const [appId, setAppId] = useState(null);
   const handleDeleteSoftwareApp = (id) => {
@@ -81,6 +84,7 @@ const Dashboard = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(getAllExperiences());
     if (skillError) {
       toast.error(skillError);
       dispatch(clearAllSkillErrors());
@@ -255,6 +259,54 @@ const Dashboard = () => {
               </CardContent>
             </Card>
             <div className="grid min-[1050px]:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader className="px-7 flex items-center justify-between flex-row">
+                  <CardTitle>Experience</CardTitle>
+                  <Button onClick={() => navigateTo("/manage/experience")} className="w-fit">
+                    Manage Experience
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Banner</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead>Company</TableHead>
+                        <TableHead>Date</TableHead>
+                        <TableHead>Description</TableHead>
+                        <TableHead>Skills</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {Array.isArray(experiences) && experiences.length > 0 ? (
+                        experiences.slice(0, 3).map((element) => (
+                          <TableRow className="bg-accent" key={element._id}>
+                            <TableCell>
+                              <img
+                                src={element.experienceBanner && element.experienceBanner.url}
+                                alt={element.role}
+                                className="w-12 h-12"
+                              />
+                            </TableCell>
+                            <TableCell>{element.role}</TableCell>
+                            <TableCell>{element.company}</TableCell>
+                            <TableCell>{element.date}</TableCell>
+                            <TableCell>{element.desc}</TableCell>
+                            <TableCell>{Array.isArray(element.skills) ? element.skills.join(", ") : element.skills}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell className="text-3xl overflow-y-hidden">
+                            You have not added any experience.
+                          </TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
               <Card>
                 <CardHeader className="px-7">
                   <CardTitle>Software Applications</CardTitle>

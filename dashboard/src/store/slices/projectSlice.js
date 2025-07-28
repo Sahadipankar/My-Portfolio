@@ -84,6 +84,8 @@ const projectSlice = createSlice({
   },
 });
 
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
+
 export const getAllProjects = () => async (dispatch) => {
   dispatch(projectSlice.actions.getAllProjectsRequest());
   try {
@@ -101,8 +103,6 @@ export const getAllProjects = () => async (dispatch) => {
     );
   }
 };
-
-const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
 
 export const addNewProject = (data) => async (dispatch) => {
   dispatch(projectSlice.actions.addNewProjectRequest());
@@ -123,6 +123,7 @@ export const addNewProject = (data) => async (dispatch) => {
     );
   }
 };
+
 export const deleteProject = (id) => async (dispatch) => {
   dispatch(projectSlice.actions.deleteProjectRequest());
   try {
@@ -140,6 +141,7 @@ export const deleteProject = (id) => async (dispatch) => {
     );
   }
 };
+
 export const updateProject = (id, newData) => async (dispatch) => {
   dispatch(projectSlice.actions.updateProjectRequest());
   try {
