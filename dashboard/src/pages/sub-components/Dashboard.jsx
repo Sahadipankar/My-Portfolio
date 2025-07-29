@@ -228,36 +228,6 @@ const Dashboard = () => {
                 </Table>
               </CardContent>
             </Card>
-            <Card>
-              <CardHeader className="px-7 gap-3">
-                <CardTitle>Skills</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {skills && skills.length > 0 ? (
-                  ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
-                    <div key={cat} className="mb-6">
-                      <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
-                      <div className="grid sm:grid-cols-2 gap-4">
-                        {skills.filter((s) => s.category === cat).length > 0 ? (
-                          skills.filter((s) => s.category === cat).map((element) => (
-                            <Card key={element._id}>
-                              <CardHeader>{element.title}</CardHeader>
-                              <CardFooter>
-                                <Progress value={element.proficiency} />
-                              </CardFooter>
-                            </Card>
-                          ))
-                        ) : (
-                          <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <p className="text-3xl">You have not added any skill.</p>
-                )}
-              </CardContent>
-            </Card>
             <div className="grid min-[1050px]:grid-cols-2 gap-4">
               <Card>
                 <CardHeader className="px-7 flex items-center justify-between flex-row">
@@ -412,6 +382,36 @@ const Dashboard = () => {
                       )}
                     </TableBody>
                   </Table>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="px-7 gap-3">
+                  <CardTitle>Skills</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {skills && skills.length > 0 ? (
+                    ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
+                      <div key={cat} className="mb-6">
+                        <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          {skills.filter((s) => s.category === cat).length > 0 ? (
+                            skills.filter((s) => s.category === cat).map((element) => (
+                              <Card key={element._id}>
+                                <CardHeader>{element.title}</CardHeader>
+                                <CardFooter>
+                                  <Progress value={element.proficiency} />
+                                </CardFooter>
+                              </Card>
+                            ))
+                          ) : (
+                            <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-3xl">You have not added any skill.</p>
+                  )}
                 </CardContent>
               </Card>
             </div>

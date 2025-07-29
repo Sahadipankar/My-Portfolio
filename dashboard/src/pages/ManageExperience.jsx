@@ -61,10 +61,10 @@ const ManageExperience = () => {
     }, [dispatch, error, message]);
 
     return (
-        <div className="flex min-h-screen w-full flex-col bg-muted/40">
+        <div className="flex min-h-screen w-full flex-col bg-muted/40 px-0 sm:px-0">
             <Tabs defaultValue="week">
                 <TabsContent value="week">
-                    <Card>
+                    <Card className="w-full max-w-none">
                         <CardHeader className="flex gap-4 sm:justify-between sm:flex-row sm:items-center">
                             <CardTitle>Manage Your Experience</CardTitle>
                             <Button className="w-fit" onClick={handleReturnToDashboard}>
