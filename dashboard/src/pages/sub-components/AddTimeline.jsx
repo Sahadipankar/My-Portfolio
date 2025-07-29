@@ -133,7 +133,7 @@ const AddTimeline = () => {
                 Add Timeline
               </Button>
             ) : (
-              <SpecialLoadingButton content={"Adding New Skill"} />
+              <SpecialLoadingButton content={"Adding New Timeline"} />
             )}
           </div>
         </form>

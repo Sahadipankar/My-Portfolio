@@ -58,14 +58,19 @@ const AddExperience = () => {
         formData.append("desc", desc);
         formData.append("skills", skills);
         formData.append("experienceBanner", experienceBanner);
-        dispatch(addNewExperience(formData));
-        setRole("");
-        setCompany("");
-        setDate("");
-        setDesc("");
-        setSkills("");
-        setExperienceBanner("");
-        setExperienceBannerPreview("");
+        dispatch(addNewExperience(formData)).then((action) => {
+            if (action.payload && Array.isArray(experiences)) {
+                // Append the new experience to the end of the local state
+                setExperiences([...experiences, action.payload[action.payload.length - 1]]);
+            }
+            setRole("");
+            setCompany("");
+            setDate("");
+            setDesc("");
+            setSkills("");
+            setExperienceBanner("");
+            setExperienceBannerPreview("");
+        });
     };
 
     return (
