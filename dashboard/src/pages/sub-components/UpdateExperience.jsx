@@ -9,7 +9,7 @@ import SpecialLoadingButton from "./SpecialLoadingButton";
 import { Button } from "@/components/ui/button";
 import { clearAllExperienceErrors, getAllExperiences, resetExperienceSlice } from "@/store/slices/experienceSlice";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
 
 const UpdateExperience = () => {
     const [role, setRole] = useState("");
