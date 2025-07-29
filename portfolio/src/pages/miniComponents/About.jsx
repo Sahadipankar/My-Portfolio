@@ -5,7 +5,7 @@ const About = () => {
     <div className="w-full flex flex-col overflow-x-hidden">
       <div className="relative">
         <h1
-          className="flex gap-4 items-center text-[2rem] sm:text-[2.75rem] 
+          className="-mt-3 flex gap-4 items-center text-[2rem] sm:text-[2.75rem] 
           md:text-[3rem] lg:text-[3.8rem] leading-[56px] md:leading-[67px] 
           lg:leading-[90px] tracking-[15px] mx-auto w-fit font-extrabold about-h1"
           style={{
@@ -38,10 +38,10 @@ const About = () => {
               I build scalable web and data-driven solutions using technologies like React, Next.js, Node.js, Express.js, MongoDB, MySQL, Firebase ⚙️, along with HTML, CSS, Tailwind, Bootstrap 🎨 and RESTful APIs 🔗.
             </p>
             <p>
-              In the field of Data Science, I work with Python and other Libraries 🧠 to solve problems involving data analysis and AI. Currently I'm part of the prestigious Sabudh Foundation Full-Time Data Science Internship 🚀, where I'm exploring Machine Learning, Deep Learning, NLP and Recommender Systems.
+              In the field of Data Science, I work with Python and other Libraries 🧠 to solve problems involving data analysis and AI. Currently I'm exploring advanced domains like Machine Learning, Deep Learning, NLP, and Recommender Systems.
             </p>
             <p>
-              🌍 When I'm not immersed in code, you will find me swimming 🏊, traveling to new places ✈️ or exploring the latest tech trends & tools.
+              When I'm not immersed in code, you will find me swimming 🏊, traveling ✈️ to new places 🌍 or exploring the latest tech trends & tools.
             </p>
           </div>
         </div>
