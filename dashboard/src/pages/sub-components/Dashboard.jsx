@@ -228,55 +228,55 @@ const Dashboard = () => {
                 </Table>
               </CardContent>
             </Card>
-            <div className="grid min-[1050px]:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader className="px-7 flex items-center justify-between flex-row">
-                  <CardTitle>Experience</CardTitle>
-                  <Button onClick={() => navigateTo("/manage/experience")} className="w-fit">
-                    Manage Experience
-                  </Button>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Banner</TableHead>
-                        <TableHead>Role</TableHead>
-                        <TableHead>Company</TableHead>
-                        <TableHead>Date</TableHead>
-                        <TableHead>Description</TableHead>
-                        <TableHead>Skills</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {Array.isArray(experiences) && experiences.length > 0 ? (
-                        experiences.slice(0, 3).map((element) => (
-                          <TableRow className="bg-accent" key={element._id}>
-                            <TableCell>
-                              <img
-                                src={element.experienceBanner && element.experienceBanner.url}
-                                alt={element.role}
-                                className="w-12 h-12"
-                              />
-                            </TableCell>
-                            <TableCell>{element.role}</TableCell>
-                            <TableCell>{element.company}</TableCell>
-                            <TableCell>{element.date}</TableCell>
-                            <TableCell>{element.desc}</TableCell>
-                            <TableCell>{Array.isArray(element.skills) ? element.skills.join(", ") : element.skills}</TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell className="text-3xl overflow-y-hidden">
-                            You have not added any experience.
+            <Card className="mb-4">
+              <CardHeader className="px-7 flex items-center justify-between flex-row">
+                <CardTitle>Experience</CardTitle>
+                <Button onClick={() => navigateTo("/manage/experience")} className="w-fit">
+                  Manage Experience
+                </Button>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Banner</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead>Company</TableHead>
+                      <TableHead>Date</TableHead>
+                      <TableHead>Description</TableHead>
+                      <TableHead>Skills</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {Array.isArray(experiences) && experiences.length > 0 ? (
+                      experiences.slice(0, 3).map((element) => (
+                        <TableRow className="bg-accent" key={element._id}>
+                          <TableCell>
+                            <img
+                              src={element.experienceBanner && element.experienceBanner.url}
+                              alt={element.role}
+                              className="w-12 h-12"
+                            />
                           </TableCell>
+                          <TableCell>{element.role}</TableCell>
+                          <TableCell>{element.company}</TableCell>
+                          <TableCell>{element.date}</TableCell>
+                          <TableCell>{element.desc}</TableCell>
+                          <TableCell>{Array.isArray(element.skills) ? element.skills.join(", ") : element.skills}</TableCell>
                         </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
+                      ))
+                    ) : (
+                      <TableRow>
+                        <TableCell className="text-3xl overflow-y-hidden">
+                          You have not added any experience.
+                        </TableCell>
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+            <div className="grid min-[1050px]:grid-cols-2 gap-4">
               <Card>
                 <CardHeader className="px-7">
                   <CardTitle>Software Applications</CardTitle>
@@ -384,37 +384,37 @@ const Dashboard = () => {
                   </Table>
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader className="px-7 gap-3">
-                  <CardTitle>Skills</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {skills && skills.length > 0 ? (
-                    ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
-                      <div key={cat} className="mb-6">
-                        <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
-                        <div className="grid sm:grid-cols-2 gap-4">
-                          {skills.filter((s) => s.category === cat).length > 0 ? (
-                            skills.filter((s) => s.category === cat).map((element) => (
-                              <Card key={element._id}>
-                                <CardHeader>{element.title}</CardHeader>
-                                <CardFooter>
-                                  <Progress value={element.proficiency} />
-                                </CardFooter>
-                              </Card>
-                            ))
-                          ) : (
-                            <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
-                          )}
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-3xl">You have not added any skill.</p>
-                  )}
-                </CardContent>
-              </Card>
             </div>
+            <Card className="mb-4">
+              <CardHeader className="px-7 gap-3">
+                <CardTitle>Skills</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {skills && skills.length > 0 ? (
+                  ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
+                    <div key={cat} className="mb-6">
+                      <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        {skills.filter((s) => s.category === cat).length > 0 ? (
+                          skills.filter((s) => s.category === cat).map((element) => (
+                            <Card key={element._id}>
+                              <CardHeader>{element.title}</CardHeader>
+                              <CardFooter>
+                                <Progress value={element.proficiency} />
+                              </CardFooter>
+                            </Card>
+                          ))
+                        ) : (
+                          <p className="text-lg text-muted-foreground">No {cat} skills added.</p>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-3xl">You have not added any skill.</p>
+                )}
+              </CardContent>
+            </Card>
           </div>
         </main>
       </div>
