@@ -52,6 +52,7 @@ app.use(errorMiddleware);
 
 // Root route for health check and keep-alive pings
 app.get("/", (req, res) => {
+  console.log("Root route accessed - Backend is running!");
   res.status(200).send("Backend is running!");
 });
 
