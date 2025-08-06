@@ -49,4 +49,10 @@ app.use("/api/v1/experience", experienceRouter);
 dbConnection();
 app.use(errorMiddleware);
 
+
+// Root route for health check and keep-alive pings
+app.get("/", (req, res) => {
+  res.status(200).send("Backend is running!");
+});
+
 export default app;
