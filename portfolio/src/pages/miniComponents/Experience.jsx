@@ -26,7 +26,7 @@ const Experience = () => {
     return (
         <section
             id="experience"
-            className="py-16 px-2 md:px-10 lg:px-32 font-sans min-h-screen bg-gradient-to-br relative overflow-x-hidden"
+            className="pt-0 sm:pt-0 md:pt-0 pb-16 px-2 md:px-10 lg:px-32 font-sans min-h-screen bg-gradient-to-br relative overflow-x-hidden"
         >
             {/* Static glowing background */}
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -34,14 +34,14 @@ const Experience = () => {
 
             <div className="text-center mb-12 relative z-10">
                 <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient">Experience</h2>
-                <p className="text-gray-300 mt-6 text-lg md:text-xl max-w-2xl mx-auto font-medium animate-fadein">
-                    Explore my professional journey and the roles I've embraced in various organizations.
+                <p className="text-gray-300 mt-6 text-lg md:text-xl max-w-2xl mx-auto font-medium animate-fadein uppercase">
+                    My professional journey & experience in various organizations.
                 </p>
             </div>
 
             <div className="flex flex-col items-center w-full relative z-10">
                 {loading ? (
-                    <div className="text-center text-white text-xl">Loading...</div>
+                    <div className="text-center text-white text-xl animate-pulse">Loading experience data... Please wait patiently.</div>
                 ) : error ? (
                     <div className="text-center text-red-500 text-lg">{error}</div>
                 ) : experiences.length > 0 ? (

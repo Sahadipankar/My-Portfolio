@@ -12,7 +12,7 @@ const About = () => {
             background: "hsl(222.2 84% 4.9%)",
           }}
         >
-          ABOUT <span className="text-tubeLight-effect font-extrabold">ME</span>
+          <nbsp></nbsp>ABOUT<span className="text-tubeLight-effect font-extrabold">ME</span>
         </h1>
         <span className="absolute w-full h-1 top-7 sm:top-7 md:top-8 lg:top-11 z-[-1] bg-slate-200"></span>
       </div>
@@ -38,10 +38,10 @@ const About = () => {
               I build scalable web and data-driven solutions using technologies like React, Next.js, Node.js, Express.js, MongoDB, MySQL, Firebase ⚙️, along with HTML, CSS, Tailwind, Bootstrap 🎨 and RESTful APIs 🔗.
             </p>
             <p>
-              In the field of Data Science, I work with Python and other Libraries 🧠 to solve problems involving data analysis and AI. Currently I'm exploring advanced domains like Machine Learning, Deep Learning, NLP, and Recommender Systems.
-            </p>
+              In the field of Data Science, I work with Python and other Libraries 🧠 to solve problems involving data analysis and AI. 
+              </p>
             <p>
-              When I'm not immersed in code, you will find me swimming 🏊, traveling ✈️ to new places 🌍 or exploring the latest tech trends & tools.
+              Currently I'm exploring advanced domains like AI/ML, Deep Learning, NLP and Neural Network.
             </p>
           </div>
         </div>

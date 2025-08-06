@@ -19,6 +19,7 @@ const ProjectView = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getProject = async () => {
       await axios
@@ -39,9 +40,11 @@ const ProjectView = () => {
           setProjectBannerPreview(
             res.data.project.projectBanner && res.data.project.projectBanner.url
           );
+          setLoading(false);
         })
         .catch((error) => {
           toast.error(error.response.data.message);
+          setLoading(false);
         });
     };
     getProject();
@@ -55,6 +58,9 @@ const ProjectView = () => {
     navigateTo("/");
   };
 
+  if (loading) {
+    return <div className="text-center text-white text-xl animate-pulse min-h-[60vh] flex items-center justify-center">Loading project details... Please wait patiently.</div>;
+  }
   return (
     <>
       <div className="flex mt-7 justify-center items-center min-h-[100vh] sm:gap-4 sm:py-4">

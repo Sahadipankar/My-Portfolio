@@ -15,6 +15,7 @@ import axios from "axios";
 
 const Hero = () => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getMyProfile = async () => {
       const { data } = await axios.get(
@@ -22,9 +23,13 @@ const Hero = () => {
         { withCredentials: true }
       );
       setUser(data.user);
+      setLoading(false);
     };
     getMyProfile();
   }, []);
+  if (loading) {
+    return <div className="text-center text-white text-xl animate-pulse">Loading profile... Please wait patiently.</div>;
+  }
   return (
     <div className="w-full -mt-3">
       <div className="flex items-center gap-2 mb-2">

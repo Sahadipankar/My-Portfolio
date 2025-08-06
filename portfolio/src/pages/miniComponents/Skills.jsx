@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const Skills = () => {
   const [skills, setSkills] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getMySkills = async () => {
       const { data } = await axios.get(
@@ -11,6 +12,7 @@ const Skills = () => {
         { withCredentials: true }
       );
       setSkills(data.skills);
+      setLoading(false);
     };
     getMySkills();
   }, []);
@@ -20,31 +22,35 @@ const Skills = () => {
       lg:text-[3.8rem] tracking-[15px] dancing_text mx-auto w-fit">
         SKILLS
       </h1>
-      {["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => {
-        return (
-          <div key={cat} className="mb-5">
-            <h2 className="text-xl font-bold mb-4 capitalize">{cat}</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {skills && skills.filter((s) => s.category === cat).length > 0 ? (
-                skills.filter((s) => s.category === cat).map((element) => (
-                  <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3" key={element._id}>
-                    <img
-                      src={element.svg && element.svg.url}
-                      alt="skill"
-                      className="h-12 sm:h-24 w-auto"
-                    />
-                    <p className="text-muted-foreground text-center">
-                      {element.title}
-                    </p>
-                  </Card>
-                ))
-              ) : (
-                <p className="text-lg text-muted-foreground">No {cat} skill added.</p>
-              )}
+      {loading ? (
+        <div className="text-center text-white text-xl animate-pulse">Loading skills data... Please wait patiently.</div>
+      ) : (
+        ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => {
+          return (
+            <div key={cat} className="mb-5">
+              <h2 className="text-xl font-bold mb-4 capitalize">{cat}</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {skills && skills.filter((s) => s.category === cat).length > 0 ? (
+                  skills.filter((s) => s.category === cat).map((element) => (
+                    <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3" key={element._id}>
+                      <img
+                        src={element.svg && element.svg.url}
+                        alt="skill"
+                        className="h-12 sm:h-24 w-auto"
+                      />
+                      <p className="text-muted-foreground text-center">
+                        {element.title}
+                      </p>
+                    </Card>
+                  ))
+                ) : (
+                  <p className="text-lg text-muted-foreground">No {cat} skill added.</p>
+                )}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 };
