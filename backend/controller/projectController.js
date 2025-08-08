@@ -1,23 +1,60 @@
-import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
-import ErrorHandler from "../middlewares/error.js";
-import { Project } from "../models/projectSchema.js";
-import { v2 as cloudinary } from "cloudinary";
-import { getCurrentDate } from "../utils/getCurrentDate.js";
+// ====================================
+// PROJECT CONTROLLER
+// ====================================
+// This module handles all project-related operations for the portfolio application
+// Includes CRUD operations for portfolio projects with image upload functionality
+// Manages project data display for both dashboard and public portfolio
 
+// Import required modules and utilities
+import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js"; // Async error wrapper
+import ErrorHandler from "../middlewares/error.js";              // Custom error handler
+import { Project } from "../models/projectSchema.js";            // Project model
+import { v2 as cloudinary } from "cloudinary";                   // Cloudinary for image uploads
+import { getCurrentDate } from "../utils/getCurrentDate.js";     // Date utility for file naming
+
+// ====================================
+// ADD NEW PROJECT CONTROLLER
+// ====================================
+
+/**
+ * Add New Project
+ * Creates a new portfolio project with banner image upload
+ * Validates required fields and uploads project banner to Cloudinary
+ * 
+ * @route POST /api/v1/project/add
+ * @access Protected (Admin only)
+ */
 export const addNewProject = catchAsyncErrors(async (req, res, next) => {
+  // ====================================
+  // FILE VALIDATION
+  // ====================================
+
+  // Check if project banner image is uploaded
   if (!req.files || Object.keys(req.files).length === 0) {
     return next(new ErrorHandler("Project Banner Image Is Required!", 404));
   }
+
   const { projectBanner } = req.files;
+
+  // ====================================
+  // EXTRACT PROJECT DATA
+  // ====================================
+
   const {
-    title,
-    description,
-    gitRepoLink,
-    projectLink,
-    stack,
-    technologies,
-    deployed,
+    title,          // Project name/title
+    description,    // Detailed project description
+    gitRepoLink,    // GitHub repository URL
+    projectLink,    // Live project demo URL
+    stack,          // Technology stack category
+    technologies,   // Technologies used in the project
+    deployed,       // Deployment status or platform
   } = req.body;
+
+  // ====================================
+  // INPUT VALIDATION
+  // ====================================
+
+  // Ensure all required fields are provided
   if (
     !title ||
     !description ||
@@ -29,13 +66,21 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
   ) {
     return next(new ErrorHandler("Please Provide All The Required Fields!", 400));
   }
+
+  // ====================================
+  // CLOUDINARY IMAGE UPLOAD
+  // ====================================
+
+  // Upload project banner to Cloudinary with organized folder structure
   const cloudinaryResponse = await cloudinary.uploader.upload(
     projectBanner.tempFilePath,
     {
-      folder: "MY PORTFOLIO/PROJECT IMAGES",
-      public_id: `Project_Image_${getCurrentDate()}`
+      folder: "MY PORTFOLIO/PROJECT IMAGES",        // Organized folder structure
+      public_id: `Project_Image_${getCurrentDate()}` // Unique filename with timestamp
     }
   );
+
+  // Handle upload errors
   if (!cloudinaryResponse || cloudinaryResponse.error) {
     console.error(
       "Cloudinary Error:",
@@ -43,6 +88,12 @@ export const addNewProject = catchAsyncErrors(async (req, res, next) => {
     );
     return next(new ErrorHandler("Failed to upload avatar to Cloudinary", 500));
   }
+
+  // ====================================
+  // PROJECT CREATION
+  // ====================================
+
+  // Create new project document with all provided data and uploaded image URL
   const project = await Project.create({
     title,
     description,

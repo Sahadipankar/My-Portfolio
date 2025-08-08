@@ -1,39 +1,61 @@
+// ====================================
+// FORGOT/RESET PASSWORD REDUX SLICE
+// ====================================
+// This module manages the forgot and reset password state for the dashboard.
+// Handles password reset requests and state management.
+// Central state management for all password reset-related operations.
+
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+/**
+ * Forgot/Reset Password Slice Definition
+ * Manages password reset state, request/response, and related UI states.
+ *
+ * State Structure:
+ * - loading: Indicates if an async operation is in progress
+ * - error: Error messages from failed operations
+ * - message: Success messages from operations
+ */
 const forgotResetPassSlice = createSlice({
   name: "forgotPassword",
   initialState: {
-    loading: false,
-    error: null,
-    message: null,
+    loading: false,   // Loading state for async operations
+    error: null,      // Error messages from failed operations
+    message: null,    // Success messages from operations
   },
   reducers: {
+    // Forgot password request
     forgotPasswordRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
+    // Forgot password success
     forgotPasswordSuccess(state, action) {
       state.loading = false;
       state.error = null;
       state.message = action.payload;
     },
+    // Forgot password failed
     forgotPasswordFailed(state, action) {
       state.loading = false;
       state.error = action.payload;
       state.message = null;
     },
+    // Reset password request
     resetPasswordRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
+    // Reset password success
     resetPasswordSuccess(state, action) {
       state.loading = false;
       state.error = null;
       state.message = action.payload;
     },
+    // Reset password failed
     resetPasswordFailed(state, action) {
       state.loading = false;
       state.error = action.payload;

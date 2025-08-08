@@ -1,4 +1,5 @@
-
+// UpdateExperience component allows the user to update an existing experience in their portfolio.
+// Handles form state, validation, and dispatches update actions to Redux.
 import React, { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,7 +12,12 @@ import { clearAllExperienceErrors, getAllExperiences, resetExperienceSlice } fro
 
 const baseUrl = import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL;
 
+/**
+ * UpdateExperience component allows the user to update an existing experience in their portfolio.
+ * Handles form state, validation, and dispatches update actions to Redux.
+ */
 const UpdateExperience = () => {
+    // Form state for experience fields
     const [role, setRole] = useState("");
     const [company, setCompany] = useState("");
     const [date, setDate] = useState("");
@@ -19,11 +25,13 @@ const UpdateExperience = () => {
     const [skills, setSkills] = useState("");
     const [experienceBanner, setExperienceBanner] = useState("");
     const [experienceBannerPreview, setExperienceBannerPreview] = useState("");
+    // Get experience state from Redux store
     const { error, message, experiences } = useSelector((state) => state.experience);
     const dispatch = useDispatch();
     const { id } = useParams();
     const [loading, setLoading] = useState(false);
 
+    // Handle experience banner file input and preview
     const handleExperienceBanner = (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
@@ -34,6 +42,7 @@ const UpdateExperience = () => {
         };
     };
 
+    // Fetch experience data if not already loaded
     useEffect(() => {
         const getExperience = async () => {
             if (!experiences || experiences.length === 0) {
@@ -94,134 +103,104 @@ const UpdateExperience = () => {
     };
 
     return (
-        <>
-            <div className="flex mt-7 justify-center items-center min-h-[100vh] sm:gap-4 sm:py-4">
-                <form
-                    onSubmit={handleUpdateExperience}
-                    className="w-[100%] px-5 md:w-[1000px] pb-5"
-                >
-                    <div className="space-y-12">
-                        <div className="border-b border-gray-900/10 pb-12">
-                            <div className="flex flex-col gap-2 items-start justify-between sm:items-center sm:flex-row">
-                                <h2 className="font-semibold leading-7 text-gray-900 text-3xl">
-                                    UPDATE EXPERIENCE
-                                </h2>
-                                <Button onClick={handleReturnToDashboard}>
-                                    Return to Dashboard
-                                </Button>
-                            </div>
-                            <div className="mt-10 flex flex-col gap-5">
-                                <div className="w-full sm:col-span-4">
-                                    <img
-                                        src={experienceBannerPreview ? experienceBannerPreview : "/avatarHolder.jpg"}
-                                        alt="experienceBanner"
-                                        className="w-full h-auto"
-                                    />
-                                    <div className="relative">
-                                        <input
-                                            type="file"
-                                            onChange={handleExperienceBanner}
-                                            className="avatar-update-btn mt-4 w-full"
-                                        />
-                                    </div>
-                                </div>
-                                <div className="w-full sm:col-span-4">
-                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                        Role
-                                    </label>
-                                    <div className="mt-2">
-                                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                            <input
-                                                type="text"
-                                                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                placeholder="Role"
-                                                value={role}
-                                                onChange={(e) => setRole(e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-full sm:col-span-4">
-                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                        Company
-                                    </label>
-                                    <div className="mt-2">
-                                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                            <input
-                                                type="text"
-                                                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                placeholder="Company"
-                                                value={company}
-                                                onChange={(e) => setCompany(e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-full sm:col-span-4">
-                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                        Date
-                                    </label>
-                                    <div className="mt-2">
-                                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                            <input
-                                                type="text"
-                                                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                placeholder="Date"
-                                                value={date}
-                                                onChange={(e) => setDate(e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-full sm:col-span-4">
-                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                        Description
-                                    </label>
-                                    <div className="mt-2">
-                                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                            <Textarea
-                                                placeholder="Description"
-                                                value={desc}
-                                                onChange={(e) => setDesc(e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="w-full sm:col-span-4">
-                                    <label className="block text-sm font-medium leading-6 text-gray-900">
-                                        Skills (comma separated)
-                                    </label>
-                                    <div className="mt-2">
-                                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                                            <input
-                                                type="text"
-                                                className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                placeholder="React, Node, MongoDB"
-                                                value={skills}
-                                                onChange={(e) => setSkills(e.target.value)}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-2">
+            <form
+                onSubmit={handleUpdateExperience}
+                className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 border border-gray-200"
+            >
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+                    <h2 className="font-bold text-3xl text-indigo-700 tracking-tight">Update Experience</h2>
+                    <Button onClick={handleReturnToDashboard} type="button" className="w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">Return to Dashboard</Button>
+                </div>
+                <div className="flex flex-col gap-6">
+                    {/* Experience Banner */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Experience Banner</label>
+                        <div className="flex flex-col items-center justify-center border-2 border-dashed border-indigo-200 rounded-xl p-6 bg-indigo-50 mb-2">
+                            <img
+                                src={experienceBannerPreview ? experienceBannerPreview : "/avatarHolder.jpg"}
+                                alt="experienceBanner"
+                                className="mx-auto h-40 w-full object-contain rounded-lg shadow-md border border-gray-200 bg-white"
+                            />
+                            <label className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 mt-4 text-white font-semibold shadow hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 transition">
+                                <span>Upload a file</span>
+                                <input
+                                    type="file"
+                                    onChange={handleExperienceBanner}
+                                    className="sr-only"
+                                />
+                            </label>
                         </div>
                     </div>
-
-                    <div className="mt-6 flex items-center justify-end gap-x-6">
-                        {loading ? (
-                            <SpecialLoadingButton content={"Updating"} width={"w-52"} />
-                        ) : (
-                            <button
-                                type="submit"
-                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 w-52"
-                            >
-                                Update
-                            </button>
-                        )}
+                    {/* Role */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                        <input
+                            type="text"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+                            placeholder="Role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        />
                     </div>
-                </form>
-            </div>
-        </>
+                    {/* Company */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                        <input
+                            type="text"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+                            placeholder="Company"
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                        />
+                    </div>
+                    {/* Date */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                        <input
+                            type="text"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+                            placeholder="Date"
+                            value={date}
+                            onChange={(e) => setDate(e.target.value)}
+                        />
+                    </div>
+                    {/* Description */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <Textarea
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition min-h-[80px]"
+                            placeholder="Description"
+                            value={desc}
+                            onChange={(e) => setDesc(e.target.value)}
+                        />
+                    </div>
+                    {/* Skills */}
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Skills (comma separated)</label>
+                        <input
+                            type="text"
+                            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+                            placeholder="React, Node, MongoDB"
+                            value={skills}
+                            onChange={(e) => setSkills(e.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="mt-8 flex items-center justify-end">
+                    {loading ? (
+                        <SpecialLoadingButton content={"Updating"} width={"w-56"} />
+                    ) : (
+                        <Button
+                            type="submit"
+                            className="w-56 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 transition"
+                        >
+                            Update
+                        </Button>
+                    )}
+                </div>
+            </form>
+        </div>
     );
 };
 

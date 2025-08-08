@@ -1,3 +1,5 @@
+// AddTimeline component allows the user to add a new timeline entry to their portfolio.
+// Handles form state, validation, and dispatches add actions to Redux.
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,14 +14,21 @@ import {
   resetTimelineSlice,
 } from "@/store/slices/timelineSlice";
 
+/**
+ * AddTimeline component allows the user to add a new timeline entry to their portfolio.
+ * Handles form state, validation, and dispatches add actions to Redux.
+ */
 const AddTimeline = () => {
+  // Form state for timeline fields
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
 
+  // Get timeline state from Redux store
   const { loading, error, message } = useSelector((state) => state.timeline);
 
+  // Handle add new timeline action
   const handleAddNewTimeline = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -31,6 +40,7 @@ const AddTimeline = () => {
   };
 
   const dispatch = useDispatch();
+  // Handle side effects for error and success state
   useEffect(() => {
     if (error) {
       toast.error(error);
@@ -44,101 +54,73 @@ const AddTimeline = () => {
   }, [dispatch, error, message, loading]);
 
   return (
-    <>
-      <div className="flex justify-center items-center min-h-[100vh] sm:gap-4 sm:py-4 sm:pl-14">
-        <form
-          className="w-[100%] px-5 md:w-[650px]"
-          onSubmit={handleAddNewTimeline}
-        >
-          <div className="space-y-12">
-            <div className="border-b border-gray-900/10 pb-12">
-              <h2 className="font-semibold leading-7 text-gray-900 text-3xl text-center">
-                ADD A NEW TIMELINE
-              </h2>
-              <div className="mt-10 flex flex-col gap-5">
-                <div className="w-full sm:col-span-4">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Title
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                      <input
-                        type="text"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="Matriculation"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full sm:col-span-4">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Description
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                      <Textarea
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full sm:col-span-4">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Starting Point (From)
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                      <Input
-                        type="number"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="From"
-                        value={from}
-                        onChange={(e) => setFrom(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full sm:col-span-4">
-                  <label className="block text-sm font-medium leading-6 text-gray-900">
-                    Ending Point (To)
-                  </label>
-                  <div className="mt-2">
-                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600">
-                      <input
-                        type="number"
-                        className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="To"
-                        value={to}
-                        onChange={(e) => setTo(e.target.value)}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-8 px-2">
+      <form
+        className="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8 border border-gray-200"
+        onSubmit={handleAddNewTimeline}
+      >
+        <h2 className="font-bold text-3xl text-indigo-700 mb-8 text-center tracking-tight">
+          Add a New Timeline
+        </h2>
+        <div className="flex flex-col gap-6">
+          {/* Title */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+            <input
+              type="text"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+              placeholder="Matriculation"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </div>
-
-          <div className="mt-6 flex items-center justify-end gap-x-6">
-            {!loading ? (
-              <Button
-                type="submit"
-                onClick={() => handleAddNewSkill()}
-                className="w-full"
-              >
-                Add Timeline
-              </Button>
-            ) : (
-              <SpecialLoadingButton content={"Adding New Timeline"} />
-            )}
+          {/* Description */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <Textarea
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition min-h-[80px]"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
-        </form>
-      </div>
-    </>
+          {/* Starting Point (From) */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Starting Point (From)</label>
+            <Input
+              type="number"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+              placeholder="From"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+            />
+          </div>
+          {/* Ending Point (To) */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Ending Point (To)</label>
+            <input
+              type="number"
+              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
+              placeholder="To"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className="mt-8 flex items-center justify-end">
+          {!loading ? (
+            <Button
+              type="submit"
+              className="w-56 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 transition"
+            >
+              Add Timeline
+            </Button>
+          ) : (
+            <SpecialLoadingButton content={"Adding New Timeline"} width="w-56" />
+          )}
+        </div>
+      </form>
+    </div>
   );
 };
 

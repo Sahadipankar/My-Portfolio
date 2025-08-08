@@ -1,40 +1,63 @@
+// ====================================
+// SOFTWARE APPLICATION REDUX SLICE
+// ====================================
+// This module manages the software applications state for the dashboard.
+// Handles CRUD operations for software tools used in the portfolio.
+// Central state management for all software application-related operations.
+
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+/**
+ * Software Application Slice Definition
+ * Manages software applications state, CRUD operations, and related UI states.
+ *
+ * State Structure:
+ * - loading: Indicates if an async operation is in progress
+ * - softwareApplications: Array of software application entries
+ * - error: Error messages from failed operations
+ * - message: Success messages from operations
+ */
 const softwareApplicationSlice = createSlice({
   name: "softwareApplications",
   initialState: {
-    loading: false,
-    softwareApplications: [],
-    error: null,
-    message: null,
+    loading: false,                 // Loading state for async operations
+    softwareApplications: [],       // Array of software application entries
+    error: null,                    // Error messages from failed operations
+    message: null,                  // Success messages from operations
   },
   reducers: {
+    // Fetch all software applications - request
     getAllsoftwareApplicationsRequest(state, action) {
       state.softwareApplications = [];
       state.error = null;
       state.loading = true;
     },
+    // Fetch all software applications - success
     getAllsoftwareApplicationsSuccess(state, action) {
       state.softwareApplications = action.payload;
       state.error = null;
       state.loading = false;
     },
+    // Fetch all software applications - failed
     getAllsoftwareApplicationsFailed(state, action) {
       state.softwareApplications = state.softwareApplications;
       state.error = action.payload;
       state.loading = false;
     },
+    // Add new software application - request
     addNewsoftwareApplicationsRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
+    // Add new software application - success
     addNewsoftwareApplicationsSuccess(state, action) {
       state.error = null;
       state.loading = false;
       state.message = action.payload;
     },
+    // Add new software application - failed
     addNewsoftwareApplicationsFailed(state, action) {
       state.error = action.payload;
       state.loading = false;

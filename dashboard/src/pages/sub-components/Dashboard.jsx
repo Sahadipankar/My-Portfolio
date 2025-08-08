@@ -1,5 +1,13 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+/**
+ * DASHBOARD OVERVIEW COMPONENT
+ * This is the main dashboard component that provides an overview of all portfolio data.
+ * Features: Statistics cards, data tables, charts, quick actions, status indicators.
+ * UI: Cards layout with organized sections for different data types.
+ */
+
+// Import required UI components
+import { Badge } from "@/components/ui/badge"; // Status badges
+import { Button } from "@/components/ui/button"; // Action buttons
 import {
   Card,
   CardContent,
@@ -7,8 +15,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+} from "@/components/ui/card"; // Card components for organized layout
+import { Progress } from "@/components/ui/progress"; // Progress bars for skills
 import {
   Table,
   TableBody,
@@ -16,8 +24,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+} from "@/components/ui/table"; // Table components for data display
+import { Tabs, TabsContent } from "@/components/ui/tabs"; // Tab navigation
+
+// Import Redux slices and actions for state management
 import { clearAllSkillErrors } from "@/store/slices/skillSlice";
 import {
   clearAllSoftwareAppErrors,
@@ -26,6 +36,8 @@ import {
   resetSoftwareApplicationSlice,
 } from "@/store/slices/softwareApplicationSlice";
 import { getAllExperiences } from "@/store/slices/experienceSlice";
+
+// Import React hooks
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -73,7 +85,6 @@ const Dashboard = () => {
   const { projects, error: projectError } = useSelector(
     (state) => state.project
   );
-  // Add experiences selector for dashboard experience table
   const { experiences } = useSelector((state) => state.experience);
 
   const [appId, setAppId] = useState(null);
@@ -121,287 +132,260 @@ const Dashboard = () => {
   ]);
 
   return (
-    <>
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-2 xl:grid-cols-2">
-          <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
-            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-              <Card className="sm:col-span-2">
-                <CardHeader className="pb-3">
-                  <CardDescription className="max-w-lg text-balance leading-relaxed">
-                    {user && user.aboutMe ? user.aboutMe : ""}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                  <Button onClick={handleVisitPortfolio}>Visit Portfolio</Button>
-                </CardFooter>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-4 px-2 sm:py-8 sm:px-4">
+      <div className="flex flex-col items-center w-full">
+        <main className="w-full max-w-7xl grid flex-1 items-start gap-4 p-2 sm:gap-8 sm:p-4 md:gap-10 lg:grid-cols-2 xl:grid-cols-2">
+          <div className="grid auto-rows-max items-start gap-4 sm:gap-8 lg:col-span-2">
+            {/* Overview Cards */}
+            <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
+              <Card className="col-span-1 sm:col-span-2 bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-14 sm:gap-0 px-4 sm:px-6 py-4">
+                  <div className="flex-1">
+                    <CardDescription className="max-w-lg text-balance leading-relaxed text-sm sm:text-base">
+                      {user && user.aboutMe ? user.aboutMe : ""}
+                    </CardDescription>
+                  </div>
+                  <div className="w-full sm:w-auto mt-2 sm:mt-0 flex-shrink-0">
+                    <Button className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={handleVisitPortfolio}>Visit Portfolio</Button>
+                  </div>
+                </div>
               </Card>
-              <Card className="flex flex-col justify-center">
-                <CardHeader className="pb-2">
-                  <CardTitle>Projects Completed</CardTitle>
-                  <CardTitle className="text-6xl">
+              <Card className="flex flex-col justify-center bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+                <CardHeader className="pb-2 px-4 sm:px-6">
+                  <CardTitle className="text-lg sm:text-xl">Projects Completed</CardTitle>
+                  <CardTitle className="text-4xl sm:text-6xl">
                     {Array.isArray(projects) ? projects.length : 0}
                   </CardTitle>
                 </CardHeader>
-                <CardFooter>
-                  <Button onClick={gotoMangeProjects}>Manage Projects</Button>
+                <CardFooter className="px-4 sm:px-6">
+                  <Button className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={gotoMangeProjects}>Manage Projects</Button>
                 </CardFooter>
               </Card>
-              <Card className="flex flex-col justify-center">
-                <CardHeader className="pb-2">
-                  <CardTitle>Skills</CardTitle>
-                  <CardTitle className="text-6xl">
+              <Card className="flex flex-col justify-center bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+                <CardHeader className="pb-2 px-4 sm:px-6">
+                  <CardTitle className="text-lg sm:text-xl">Skills</CardTitle>
+                  <CardTitle className="text-4xl sm:text-6xl">
                     {Array.isArray(skills) ? skills.length : 0}
                   </CardTitle>
                 </CardHeader>
-                <CardFooter>
-                  <Button onClick={gotoMangeSkills}>Manage Skill</Button>
+                <CardFooter className="px-4 sm:px-6">
+                  <Button className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={gotoMangeSkills}>Manage Skill</Button>
                 </CardFooter>
               </Card>
             </div>
-            <Card>
-              <CardHeader className="px-7">
-                <CardTitle>Projects</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Title</TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Stack
-                      </TableHead>
-                      <TableHead className="hidden md:table-cell">
-                        Deployed
-                      </TableHead>
-                      <TableHead className="md:table-cell">
-                        Update
-                      </TableHead>
-                      <TableHead className="text-right">Visit</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {projects && projects.length > 0 ? (
-                      projects.map((element) => {
-                        return (
-                          <TableRow className="bg-accent" key={element._id}>
-                            <TableCell>
-                              <div className="font-medium">
-                                {element.title}
-                              </div>
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell font-semibold uppercase">
-                              {element.stack}
-                            </TableCell>
-                            <TableCell className="hidden md:table-cell font-semibold uppercase">
-                              <Badge
-                                className="text-xs"
-                                variant="secondary"
-                              >
-                                {element.deployed}
-                              </Badge>
-                            </TableCell>
-                            <TableCell className="md:table-cell">
-                              <Link to={`/update/project/${element._id}`}>
-                                <Button>Update</Button>
-                              </Link>
-                            </TableCell>
-                            <TableCell className="text-right">
-                              <Link
-                                to={element.projectLink}
-                                target="_blank"
-                              >
-                                <Button>Visit</Button>
-                              </Link>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      })
-                    ) : (
-                      <TableRow>
-                        <TableCell className="text-3xl overflow-y-hidden">
-                          You have not added any project.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-            <Card className="mb-4">
-              <CardHeader className="px-7 flex items-center justify-between flex-row">
-                <CardTitle>Experience</CardTitle>
-                <Button onClick={() => navigateTo("/manage/experience")} className="w-fit">
-                  Manage Experience
+            {/* Projects Table */}
+            <Card className="bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+              <CardHeader className="px-4 sm:px-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <CardTitle className="text-lg sm:text-xl">Projects</CardTitle>
+                <Button onClick={gotoMangeProjects} className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">
+                  Manage Projects
                 </Button>
               </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Banner</TableHead>
-                      <TableHead>Role</TableHead>
-                      <TableHead>Company</TableHead>
-                      <TableHead>Date</TableHead>
-                      <TableHead>Description</TableHead>
-                      <TableHead>Skills</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {Array.isArray(experiences) && experiences.length > 0 ? (
-                      experiences.slice(0, 3).map((element) => (
-                        <TableRow className="bg-accent" key={element._id}>
-                          <TableCell>
-                            <img
-                              src={element.experienceBanner && element.experienceBanner.url}
-                              alt={element.role}
-                              className="w-12 h-12"
-                            />
-                          </TableCell>
-                          <TableCell>{element.role}</TableCell>
-                          <TableCell>{element.company}</TableCell>
-                          <TableCell>{element.date}</TableCell>
-                          <TableCell>{element.desc}</TableCell>
-                          <TableCell>{Array.isArray(element.skills) ? element.skills.join(", ") : element.skills}</TableCell>
-                        </TableRow>
-                      ))
-                    ) : (
-                      <TableRow>
-                        <TableCell className="text-3xl overflow-y-hidden">
-                          You have not added any experience.
-                        </TableCell>
-                      </TableRow>
-                    )}
-                  </TableBody>
-                </Table>
-              </CardContent>
-            </Card>
-            <div className="grid min-[1050px]:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader className="px-7">
-                  <CardTitle>Software Applications</CardTitle>
-                </CardHeader>
-                <CardContent>
+              <CardContent className="px-4 sm:px-6">
+                <div className="overflow-x-auto">
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Name</TableHead>
-                        <TableHead className="md:table-cell">Icon</TableHead>
-                        <TableHead className="md:table-cell text-center">
-                          Action
-                        </TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead className="hidden md:table-cell">Stack</TableHead>
+                        <TableHead className="hidden md:table-cell">Deployed</TableHead>
+                        <TableHead className="hidden sm:table-cell">Update</TableHead>
+                        <TableHead className="text-right">Visit</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {softwareApplications &&
-                        softwareApplications.length > 0 ? (
-                        softwareApplications.map((element) => {
-                          return (
-                            <TableRow className="bg-accent" key={element._id}>
+                      {projects && projects.length > 0 ? (
+                        projects.map((element) => (
+                          <TableRow className="bg-indigo-50/60 hover:bg-indigo-100/60 transition" key={element._id}>
+                            <TableCell>
+                              <div className="font-medium">{element.title}</div>
+                              <div className="text-xs text-muted-foreground md:hidden">{element.stack} • {element.deployed}</div>
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell font-semibold uppercase">{element.stack}</TableCell>
+                            <TableCell className="hidden md:table-cell font-semibold uppercase">
+                              <Badge className="text-xs bg-indigo-100 text-indigo-700 border-none" variant="secondary">{element.deployed}</Badge>
+                            </TableCell>
+                            <TableCell className="hidden sm:table-cell">
+                              <Link to={`/update/project/${element._id}`}>
+                                <Button size="sm" className="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">Update</Button>
+                              </Link>
+                            </TableCell>
+                            <TableCell className="text-right">
+                              <Link to={element.projectLink} target="_blank">
+                                <Button size="sm" className="bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">Visit</Button>
+                              </Link>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={5} className="text-center text-lg text-gray-500 py-8">You have not added any project.</TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+            {/* Experience Table */}
+            <Card className="mb-4 bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+              <CardHeader className="px-4 sm:px-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <CardTitle className="text-lg sm:text-xl">Experience</CardTitle>
+                <Button onClick={() => navigateTo("/manage/experience")}
+                  className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">
+                  Manage Experience
+                </Button>
+              </CardHeader>
+              <CardContent className="px-4 sm:px-6">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="hidden sm:table-cell">Banner</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead className="hidden md:table-cell">Company</TableHead>
+                        <TableHead className="hidden lg:table-cell">Date</TableHead>
+                        <TableHead className="hidden xl:table-cell">Description</TableHead>
+                        <TableHead className="hidden xl:table-cell">Skills</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {Array.isArray(experiences) && experiences.length > 0 ? (
+                        experiences.slice(0, 3).map((element) => (
+                          <TableRow className="bg-indigo-50/60 hover:bg-indigo-100/60 transition" key={element._id}>
+                            <TableCell className="hidden sm:table-cell">
+                              <img src={element.experienceBanner && element.experienceBanner.url} alt={element.role} className="w-12 h-12 rounded-lg border border-gray-200 bg-white object-cover" />
+                            </TableCell>
+                            <TableCell>
+                              <div className="font-medium">{element.role}</div>
+                              <div className="text-xs text-muted-foreground md:hidden">{element.company}</div>
+                              <div className="text-xs text-muted-foreground lg:hidden mt-1">{element.date}</div>
+                            </TableCell>
+                            <TableCell className="hidden md:table-cell">{element.company}</TableCell>
+                            <TableCell className="hidden lg:table-cell">{element.date}</TableCell>
+                            <TableCell className="hidden xl:table-cell">{element.desc}</TableCell>
+                            <TableCell className="hidden xl:table-cell">{Array.isArray(element.skills) ? element.skills.join(", ") : element.skills}</TableCell>
+                          </TableRow>
+                        ))
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={6} className="text-center text-lg text-gray-500 py-8">You have not added any experience.</TableCell>
+                        </TableRow>
+                      )}
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+            {/* Software Applications & Timeline */}
+            <div className="grid grid-cols-1 min-[1050px]:grid-cols-2 gap-4 sm:gap-6">
+              <Card className="bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+                <CardHeader className="px-4 sm:px-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <CardTitle className="text-lg sm:text-xl">Software Applications</CardTitle>
+                </CardHeader>
+                <CardContent className="px-4 sm:px-6">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Name</TableHead>
+                          <TableHead className="hidden sm:table-cell">Icon</TableHead>
+                          <TableHead className="text-center">Action</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {softwareApplications && softwareApplications.length > 0 ? (
+                          softwareApplications.map((element) => (
+                            <TableRow className="bg-indigo-50/60 hover:bg-indigo-100/60 transition" key={element._id}>
                               <TableCell className="font-medium">
-                                {element.name}
+                                <div className="flex items-center gap-2 sm:gap-0">
+                                  <img className="w-6 h-6 rounded bg-white border border-gray-200 sm:hidden" src={element.svg && element.svg.url} alt={element.name} />
+                                  {element.name}
+                                </div>
                               </TableCell>
-                              <TableCell className="md:table-cell">
-                                <img
-                                  className="w-7 h-7"
-                                  src={element.svg && element.svg.url}
-                                  alt={element.name}
-                                />
+                              <TableCell className="hidden sm:table-cell">
+                                <img className="w-7 h-7 rounded bg-white border border-gray-200" src={element.svg && element.svg.url} alt={element.name} />
                               </TableCell>
-                              <TableCell className="md:table-cell  text-center">
+                              <TableCell className="text-center">
                                 {appLoading && appId === element._id ? (
-                                  <SpecialLoadingButton
-                                    content={"Deleting"}
-                                    width={"w-fit"}
-                                  />
+                                  <SpecialLoadingButton content={"Deleting"} width={"w-fit"} />
                                 ) : (
-                                  <Button
-                                    onClick={() =>
-                                      handleDeleteSoftwareApp(element._id)
-                                    }
-                                  >
+                                  <Button size="sm" className="bg-gradient-to-r from-red-500 via-pink-500 to-purple-600 text-white font-semibold shadow-md hover:from-red-600 hover:to-pink-600" onClick={() => handleDeleteSoftwareApp(element._id)}>
                                     Delete
                                   </Button>
                                 )}
                               </TableCell>
                             </TableRow>
-                          );
-                        })
-                      ) : (
-                        <TableRow>
-                          <TableCell className="text-3xl overflow-y-hidden">
-                            You have not added any skill.
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={3} className="text-center text-lg text-gray-500 py-8">You have not added any software application.</TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader className="px-7 flex items-center justify-between flex-row">
-                  <CardTitle>Timeline</CardTitle>
-                  <Button onClick={gotoMangeTimeline} className="w-fit">
-                    Manage Timeline
-                  </Button>
+              <Card className="bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+                <CardHeader className="px-4 sm:px-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <CardTitle className="text-lg sm:text-xl">Timeline</CardTitle>
+                  <Button onClick={gotoMangeTimeline} className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600">Manage Timeline</Button>
                 </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Title</TableHead>
-                        <TableHead className="md:table-cell">From</TableHead>
-                        <TableHead className="md:table-cell text-right">
-                          To
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {timeline && timeline.length > 0 ? (
-                        timeline.map((element) => {
-                          return (
-                            <TableRow className="bg-accent" key={element._id}>
-                              <TableCell className="font-medium">
-                                {element.title}
-                              </TableCell>
-                              <TableCell className="md:table-cell">
-                                {element.timeline.from}
-                              </TableCell>
-                              <TableCell className="md:table-cell  text-right">
-                                {element.timeline.to}
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })
-                      ) : (
+                <CardContent className="px-4 sm:px-6">
+                  <div className="overflow-x-auto">
+                    <Table>
+                      <TableHeader>
                         <TableRow>
-                          <TableCell className="text-3xl overflow-y-hidden">
-                            You have not added any timeline.
-                          </TableCell>
+                          <TableHead>Title</TableHead>
+                          <TableHead className="hidden sm:table-cell">From</TableHead>
+                          <TableHead className="hidden sm:table-cell text-right">To</TableHead>
                         </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                      <TableBody>
+                        {timeline && timeline.length > 0 ? (
+                          timeline.map((element) => (
+                            <TableRow className="bg-indigo-50/60 hover:bg-indigo-100/60 transition" key={element._id}>
+                              <TableCell className="font-medium">
+                                <div>{element.title}</div>
+                                <div className="text-xs text-muted-foreground sm:hidden">{element.timeline.from} - {element.timeline.to}</div>
+                              </TableCell>
+                              <TableCell className="hidden sm:table-cell">{element.timeline.from}</TableCell>
+                              <TableCell className="hidden sm:table-cell text-right">{element.timeline.to}</TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <TableRow>
+                            <TableCell colSpan={3} className="text-center text-lg text-gray-500 py-8">You have not added any timeline.</TableCell>
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
               </Card>
             </div>
-            <Card className="mb-4">
-              <CardHeader className="px-7 gap-3">
-                <CardTitle>Skills</CardTitle>
+            {/* Skills Section */}
+            <Card className="mb-4 bg-white/90 rounded-2xl shadow-xl border border-gray-100">
+              <CardHeader className="px-4 sm:px-7 gap-3">
+                <CardTitle className="text-lg sm:text-xl">Skills</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="px-4 sm:px-6">
                 {skills && skills.length > 0 ? (
                   ["programming languages", "frontend", "backend", "database", "tools", "libraries"].map((cat) => (
                     <div key={cat} className="mb-6">
-                      <h2 className="text-xl font-bold mb-2 capitalize">{cat}</h2>
-                      <div className="grid sm:grid-cols-2 gap-4">
+                      <h2 className="text-lg sm:text-xl font-bold mb-2 capitalize">{cat}</h2>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {skills.filter((s) => s.category === cat).length > 0 ? (
                           skills.filter((s) => s.category === cat).map((element) => (
-                            <Card key={element._id}>
-                              <CardHeader>{element.title}</CardHeader>
-                              <CardFooter>
-                                <Progress value={element.proficiency} />
-                              </CardFooter>
+                            <Card key={element._id} className="bg-indigo-50/60 border border-indigo-100 rounded-xl">
+                              <CardHeader className="font-semibold text-indigo-700 text-sm sm:text-base px-4 py-3">{element.title}</CardHeader>
+                              <CardFooter className="px-4 py-3">{element.proficiency && (
+                                <Progress
+                                  value={element.proficiency}
+                                  className="w-full h-2 bg-indigo-200"
+                                />
+                              )}</CardFooter>
                             </Card>
                           ))
                         ) : (
@@ -411,14 +395,14 @@ const Dashboard = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-3xl">You have not added any skill.</p>
+                  <p className="text-center text-lg text-gray-500 py-8">You have not added any skill.</p>
                 )}
               </CardContent>
             </Card>
           </div>
         </main>
       </div>
-    </>
+    </div>
   );
 };
 

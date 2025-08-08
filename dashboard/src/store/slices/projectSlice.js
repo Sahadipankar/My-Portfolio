@@ -1,41 +1,65 @@
+// ====================================
+// PROJECT REDUX SLICE
+// ====================================
+// This module manages the portfolio projects state for the dashboard.
+// Handles CRUD operations for projects in the portfolio.
+// Central state management for all project-related operations.
+
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+/**
+ * Project Slice Definition
+ * Manages portfolio projects state, CRUD operations, and related UI states.
+ *
+ * State Structure:
+ * - loading: Indicates if an async operation is in progress
+ * - projects: Array of project entries
+ * - error: Error messages from failed operations
+ * - message: Success messages from operations
+ * - singleProject: Data for a single project (for view/edit)
+ */
 const projectSlice = createSlice({
   name: "project",
   initialState: {
-    loading: false,
-    projects: [],
-    error: null,
-    message: null,
-    singleProject: {},
+    loading: false,         // Loading state for async operations
+    projects: [],           // Array of project entries
+    error: null,            // Error messages from failed operations
+    message: null,          // Success messages from operations
+    singleProject: {},      // Data for a single project (for view/edit)
   },
   reducers: {
+    // Fetch all projects - request
     getAllProjectsRequest(state, action) {
       state.projects = [];
       state.error = null;
       state.loading = true;
     },
+    // Fetch all projects - success
     getAllProjectsSuccess(state, action) {
       state.projects = action.payload;
       state.error = null;
       state.loading = false;
     },
+    // Fetch all projects - failed
     getAllProjectsFailed(state, action) {
       state.projects = state.projects;
       state.error = action.payload;
       state.loading = false;
     },
+    // Add new project - request
     addNewProjectRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
+    // Add new project - success
     addNewProjectSuccess(state, action) {
       state.error = null;
       state.loading = false;
       state.message = action.payload;
     },
+    // Add new project - failed
     addNewProjectFailed(state, action) {
       state.error = action.payload;
       state.loading = false;

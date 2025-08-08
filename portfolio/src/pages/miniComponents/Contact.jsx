@@ -1,42 +1,77 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+// ====================================
+// CONTACT COMPONENT
+// ====================================
+// This component provides a contact form for users to send messages
+// Features: Form validation, loading states, toast notifications, responsive design
+// Form fields: Name, Subject, Message with submit functionality
 
+// Import UI components, HTTP client, and notification system
+import { Button } from "@/components/ui/button";  // Button component for form submission
+import { Input } from "@/components/ui/input";    // Input component for form fields
+import { Label } from "@/components/ui/label";    // Label component for form labels
+import axios from "axios";                        // HTTP client for API requests
+import React, { useState } from "react";          // React hooks for state management
+import { toast } from "react-toastify";           // Toast notifications for user feedback
+
+/**
+ * Contact Component
+ * Renders a contact form with name, subject, and message fields
+ * Handles form submission and provides user feedback through toast notifications
+ */
 const Contact = () => {
-  const [senderName, setSenderName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
+  // ====================================
+  // STATE MANAGEMENT
+  // ====================================
+  const [senderName, setSenderName] = useState(""); // Store sender's name input
+  const [subject, setSubject] = useState("");       // Store message subject input
+  const [message, setMessage] = useState("");       // Store message content input
+  const [loading, setLoading] = useState(false);    // Loading state for form submission
+
+  // ====================================
+  // FORM SUBMISSION HANDLER
+  // ====================================
+  /**
+   * Handles contact form submission
+   * Sends message data to backend API and provides user feedback
+   * @param {Event} e - Form submission event
+   */
   const handleMessage = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await axios
-      .post(
+
+    try {
+      // API call to send the contact message
+      const response = await axios.post(
         `${import.meta.env.VITE_DEVELOPMENT_URL || import.meta.env.VITE_PRODUCTION_URL}/api/v1/message/send`,
         { senderName, subject, message },
         {
           withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
-      )
-      .then((res) => {
-        toast.success(res.data.message);
-        setSenderName("");
-        setSubject("");
-        setMessage("");
-        setLoading(false);
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-        setLoading(false);
-      });
+      );
+
+      // Success handling
+      toast.success(response.data.message);
+      // Reset form fields after successful submission
+      setSenderName("");
+      setSubject("");
+      setMessage("");
+      setLoading(false);
+    } catch (error) {
+      // Error handling
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
   };
+  // ====================================
+  // RENDER COMPONENT
+  // ====================================
   return (
     <>
       <div className="overflow-x-hidden">
+        {/* ====================================
+            SECTION TITLE WITH DECORATIVE STYLING
+            ==================================== */}
         <div className="relative mb-8">
           <h1
             className="flex gap-4 items-center text-[1.85rem] sm:text-[2.75rem] md:text-[3rem] 
@@ -46,50 +81,77 @@ const Contact = () => {
               background: "hsl(222.2 84% 4.9%)",
             }}
           >
-            <nbsp></nbsp>CONTACT
+            <span className="ml-3">CONTACT</span>
             <span className="text-tubeLight-effect font-extrabold">ME</span>
           </h1>
+          {/* Decorative line behind the heading */}
           <span className="absolute w-full h-1 top-7 sm:top-7 
           md:top-8 lg:top-11 z-[-1] bg-slate-200"></span>
         </div>
+
+        {/* ====================================
+            CONTACT FORM
+            ==================================== */}
         <form onSubmit={handleMessage} className="flex flex-col gap-6">
+
+          {/* ====================================
+              SENDER NAME INPUT FIELD
+              ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
             <Label className="text-xl">Your Name</Label>
             <Input
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
               placeholder="Your Name"
+              required
             />
           </div>
+
+          {/* ====================================
+              SUBJECT INPUT FIELD
+              ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
             <Label className="text-xl">Subject</Label>
             <Input
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               placeholder="Subject"
+              required
             />
           </div>
+
+          {/* ====================================
+              MESSAGE INPUT FIELD
+              ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
             <Label className="text-xl">Message</Label>
             <Input
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Your Message"
+              required
             />
           </div>
+
+          {/* ====================================
+              SUBMIT BUTTON WITH LOADING STATE
+              ==================================== */}
           <div className="flex justify-end">
             {!loading ? (
+              // Normal submit button
               <Button className="w-full sm:w-52">SEND MESSAGE</Button>
             ) : (
+              // Loading button with spinner
               <button
                 disabled
                 type="button"
                 className="w-full sm:w-52 text-slate-900  bg-white hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-white dark:hover:bg-slate-200 dark:focus:ring-blue-800 inline-flex items-center"
               >
+                {/* Loading spinner icon */}
                 <svg
                   aria-hidden="true"
                   role="status"
-                  class="inline w-4 h-4 me-3 text-slate-950 animate-spin"
+                  className="inline w-4 h-4 me-3 text-slate-950 animate-spin"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

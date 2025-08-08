@@ -1,10 +1,19 @@
+// SpecialLoadingButton component renders a disabled button with a loading spinner and custom content.
+// Used to indicate loading state for form submissions or async actions.
 import { Button } from "@/components/ui/button";
 import React from "react";
 
+/**
+ * SpecialLoadingButton component renders a disabled button with a loading spinner and custom content.
+ * Used to indicate loading state for form submissions or async actions.
+ * @param {string} content - The text/content to display inside the button.
+ * @param {string} width - Optional width class for the button.
+ */
 const SpecialLoadingButton = ({ content, width }) => {
   return (
     <>
       <Button disabled type="button" className={width ? `${width}` : "w-full"}>
+        {/* SVG spinner icon */}
         <svg
           aria-hidden="true"
           role="status"

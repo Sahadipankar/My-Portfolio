@@ -1,40 +1,63 @@
+// ====================================
+// SKILL REDUX SLICE
+// ====================================
+// This module manages the technical skills state for the dashboard.
+// Handles CRUD operations for skills used in the portfolio.
+// Central state management for all skill-related operations.
+
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+/**
+ * Skill Slice Definition
+ * Manages technical skills state, CRUD operations, and related UI states.
+ *
+ * State Structure:
+ * - loading: Indicates if an async operation is in progress
+ * - skills: Array of skill entries
+ * - error: Error messages from failed operations
+ * - message: Success messages from operations
+ */
 const skillSlice = createSlice({
   name: "skill",
   initialState: {
-    loading: false,
-    skills: [],
-    error: null,
-    message: null,
+    loading: false,         // Loading state for async operations
+    skills: [],             // Array of skill entries
+    error: null,            // Error messages from failed operations
+    message: null,          // Success messages from operations
   },
   reducers: {
+    // Fetch all skills - request
     getAllSkillsRequest(state, action) {
       state.skills = [];
       state.error = null;
       state.loading = true;
     },
+    // Fetch all skills - success
     getAllSkillsSuccess(state, action) {
       state.skills = action.payload;
       state.error = null;
       state.loading = false;
     },
+    // Fetch all skills - failed
     getAllSkillsFailed(state, action) {
       state.skills = state.skills;
       state.error = action.payload;
       state.loading = false;
     },
+    // Add new skill - request
     addNewSkillRequest(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
+    // Add new skill - success
     addNewSkillSuccess(state, action) {
       state.error = null;
       state.loading = false;
       state.message = action.payload;
     },
+    // Add new skill - failed
     addNewSkillFailed(state, action) {
       state.error = action.payload;
       state.loading = false;
