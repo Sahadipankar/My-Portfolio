@@ -141,11 +141,11 @@ const Dashboard = () => {
               <Card className="col-span-1 sm:col-span-2 bg-white/90 rounded-2xl shadow-xl border border-gray-100">
                 <div className="flex flex-col sm:flex-row sm:items-center gap-14 sm:gap-0 px-4 sm:px-6 py-4">
                   <div className="flex-1">
-                    <CardDescription className="max-w-lg text-balance leading-relaxed text-sm sm:text-base">
+                    <CardDescription className="max-w-lg text-balance leading-relaxed text-sm sm:text-base mt-1 hidden sm:block">
                       {user && user.aboutMe ? user.aboutMe : ""}
                     </CardDescription>
                     <div className="w-full sm:w-44 mt-4 flex-shrink-0">
-                      <Button className="w-full mt-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={handleVisitPortfolio}>Visit Portfolio</Button>
+                      <Button className="w-full mt-14 sm:mt-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={handleVisitPortfolio}>Visit Portfolio</Button>
                     </div>
                   </div>
                 </div>

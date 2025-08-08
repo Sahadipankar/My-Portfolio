@@ -360,7 +360,7 @@ const HomePage = () => {
 
         {/* Responsive welcome card (always visible and readable) */}
         <div className="flex justify-center w-full px-1 z-10 relative">
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-white rounded-2xl shadow-lg px-4 sm:px-8 py-4 border border-gray-200 w-full max-w-3xl mt-6 mb-4 overflow-x-auto">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-white rounded-2xl shadow-lg px-4 sm:px-8 py-4 border border-gray-200 w-full max-w-3xl mt-4 mb-4 overflow-x-auto">
             <img
               src={user && user.avatar && user.avatar.url}
               alt="avatar"
