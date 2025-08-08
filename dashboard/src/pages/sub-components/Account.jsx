@@ -47,7 +47,7 @@ const Account = () => {
             {/* Sidebar button for Profile */}
             <button
               type="button"
-              className={`text-left px-4 py-2 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Profile" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
+              className={`w-full text-center px-4 py-3 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Profile" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
               onClick={() => setSelectedComponent("Profile")}
             >
               Profile
@@ -55,7 +55,7 @@ const Account = () => {
             {/* Sidebar button for Update Profile */}
             <button
               type="button"
-              className={`text-left px-4 py-2 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Update Profile" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
+              className={`w-full text-center px-4 py-3 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Update Profile" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
               onClick={() => setSelectedComponent("Update Profile")}
             >
               Update Profile
@@ -63,7 +63,7 @@ const Account = () => {
             {/* Sidebar button for Update Password */}
             <button
               type="button"
-              className={`text-left px-4 py-2 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Update Password" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
+              className={`w-full text-center px-4 py-3 rounded-lg transition font-semibold text-base tracking-wide ${selectedComponent === "Update Password" ? "bg-indigo-200 text-indigo-800 shadow-md" : "text-gray-700 hover:bg-indigo-50"}`}
               onClick={() => setSelectedComponent("Update Password")}
             >
               Update Password

@@ -144,9 +144,9 @@ const Dashboard = () => {
                     <CardDescription className="max-w-lg text-balance leading-relaxed text-sm sm:text-base">
                       {user && user.aboutMe ? user.aboutMe : ""}
                     </CardDescription>
-                  </div>
-                  <div className="w-full sm:w-auto mt-2 sm:mt-0 flex-shrink-0">
-                    <Button className="w-full sm:w-44 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={handleVisitPortfolio}>Visit Portfolio</Button>
+                    <div className="w-full sm:w-44 mt-4 flex-shrink-0">
+                      <Button className="w-full mt-5 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white font-semibold shadow-md hover:from-indigo-600 hover:to-purple-600" onClick={handleVisitPortfolio}>Visit Portfolio</Button>
+                    </div>
                   </div>
                 </div>
               </Card>

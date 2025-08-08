@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 // Import Lucide React icons for navigation and UI elements
 import {
   FolderGit,          // Projects icon
-  History,            // Timeline icon
   Home,               // Dashboard home icon
   LayoutGrid,         // Skills grid icon
   LogOut,             // Logout icon
@@ -287,73 +286,73 @@ const HomePage = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-64 max-w-[90vw] p-0 bg-gradient-to-b from-indigo-100 via-white to-purple-100 border-r shadow-lg rounded-tr-3xl rounded-br-3xl">
-            <nav className="flex flex-col items-center gap-6 px-2 py-8">
+            <nav className="ml-2 flex flex-col items-start gap-6 px-2 py-8">
               {/* Brand/logo link */}
               <Link className="group flex h-12 w-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-lg font-semibold text-white shadow-md md:h-10 md:w-10 md:text-base mb-4">
                 <Package2 className="h-6 w-6 transition-all group-hover:scale-110" />
-                <span className="sr-only">Acme Inc</span>
+                <span className="sr-only">My-Portfolio</span>
               </Link>
               {/* Navigation buttons (same as sidebar) */}
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Dashboard"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Dashboard"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Dashboard"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Dashboard"); setMenuOpen(false); }}>
                 <Home className="h-6 w-6" />
-                <span className="sr-only">Dashboard</span>
+                <span>Dashboard</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Add Project"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Add Project"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Add Project"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Add Project"); setMenuOpen(false); }}>
                 <FolderGit className="h-6 w-6" />
-                <span className="sr-only">Add Project</span>
+                <span>Add Project</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Add Skill"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Add Skill"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Add Skill"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Add Skill"); setMenuOpen(false); }}>
                 <PencilRuler className="h-6 w-6" />
-                <span className="sr-only">Add Skill</span>
+                <span>Add Skill</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Add Uses"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Add Uses"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Add Uses"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Add Uses"); setMenuOpen(false); }}>
                 <LayoutGrid className="h-6 w-6" />
-                <span className="sr-only">Add Software</span>
+                <span>Add Software</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Add Timeline"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Add Timeline"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Add Timeline"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Add Timeline"); setMenuOpen(false); }}>
                 <GraduationCap className="h-6 w-6" />
-                <span className="sr-only">Add Timeline</span>
+                <span>Add Timeline</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Add Experience"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Add Experience"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Add Experience"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Add Experience"); setMenuOpen(false); }}>
                 <Briefcase className="h-6 w-6" />
-                <span className="sr-only">Add Experience</span>
+                <span>Add Experience</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Messages"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Messages"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Messages"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Messages"); setMenuOpen(false); }}>
                 <MessageSquareMore className="h-6 w-6" />
-                <span className="sr-only">Messages</span>
+                <span>Messages</span>
               </Link>
-              <Link className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-200 ${active === "Account"
+              <Link className={`flex items-center gap-3 h-12 px-4 rounded-xl transition-all duration-200 ${active === "Account"
                 ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-600 text-white shadow-lg"
-                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}
-                md:h-10 md:w-10`} onClick={() => { setActive("Account"); setMenuOpen(false); }}>
+                : "text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700"}`}
+                onClick={() => { setActive("Account"); setMenuOpen(false); }}>
                 <User className="h-6 w-6" />
-                <span className="sr-only">Account</span>
+                <span>Account</span>
               </Link>
               {/* Logout button */}
-              <Link className="flex h-12 w-12 items-center justify-center rounded-xl text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700 transition-all duration-200 md:h-10 md:w-10 bg-white shadow-md mt-8" onClick={() => { handleLogout(); setMenuOpen(false); }}>
+              <Link className="flex items-center gap-3 h-12 px-4 rounded-xl text-indigo-500 hover:bg-indigo-100 hover:text-indigo-700 transition-all duration-200 bg-white shadow-md mt-8" onClick={() => { handleLogout(); setMenuOpen(false); }}>
                 <LogOut className="h-6 w-6" />
-                <span className="sr-only">Logout</span>
+                <span>Logout</span>
               </Link>
             </nav>
           </SheetContent>
