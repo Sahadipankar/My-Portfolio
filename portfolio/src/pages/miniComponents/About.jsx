@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
  */
 const About = () => {
   return (
-    <div className="w-full flex flex-col overflow-x-hidden mt-16">
+    <div className="w-full flex flex-col overflow-x-hidden mt-14">
       {/* ====================================
           SECTION TITLE WITH DECORATIVE STYLING
           ==================================== */}
