@@ -90,7 +90,7 @@ const Hero = () => {
   // ====================================
 
   return (
-    <div className="w-full">
+    <div className="w-full -mt-2">
       {/* ====================================
           ONLINE STATUS INDICATOR
           ==================================== */}
