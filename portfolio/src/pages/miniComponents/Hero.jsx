@@ -13,7 +13,7 @@ import {
   Instagram,     // Instagram social icon
   Linkedin,      // LinkedIn social icon
   Twitter,       // Twitter social icon
-  Youtube,       // YouTube social icon (if used)
+  Youtube,       // YouTube social icon
 } from "lucide-react";
 
 // Import React hooks for state management and effects
@@ -90,7 +90,7 @@ const Hero = () => {
   // ====================================
 
   return (
-    <div className="w-full -mt-3">
+    <div className="w-full">
       {/* ====================================
           ONLINE STATUS INDICATOR
           ==================================== */}
