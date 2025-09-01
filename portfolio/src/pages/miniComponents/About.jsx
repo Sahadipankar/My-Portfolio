@@ -15,14 +15,14 @@ import React, { useEffect, useState } from "react";
  */
 const About = () => {
   return (
-    <div className="w-full flex flex-col overflow-x-hidden mt-14">
+    <div className="w-full flex flex-col overflow-x-hidden mt-9">
       {/* ====================================
           SECTION TITLE WITH DECORATIVE STYLING
           ==================================== */}
       <div className="relative">
         {/* Main heading with responsive typography and special effects */}
         <h1
-          className="-mt-3 flex gap-4 items-center text-[2rem] sm:text-[2.75rem] 
+          className="flex gap-4 items-center text-[2rem] sm:text-[2.75rem] 
           md:text-[3rem] lg:text-[3.8rem] leading-[56px] md:leading-[67px] 
           lg:leading-[90px] tracking-[15px] mx-auto w-fit font-extrabold about-h1"
           style={{

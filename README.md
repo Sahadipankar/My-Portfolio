@@ -68,6 +68,8 @@ A comprehensive portfolio platform built with the MERN stack featuring a dynamic
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 🏗️ System Architecture & Design
 
 ### 📁 **Project Structure**
@@ -149,6 +151,8 @@ My-Portfolio/
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 🛠️ Technology Stack
 
 ### 🖥️ **Backend Technologies**
@@ -187,6 +191,8 @@ My-Portfolio/
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 📦 Prerequisites & Requirements
 
 ### 🔧 **System Requirements**
@@ -203,6 +209,8 @@ My-Portfolio/
 - **🗃️ MongoDB Connection String** - Local or Atlas connection URI
 
 ---
+
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 🚀 Quick Start Guide
 
@@ -280,6 +288,8 @@ npm run dev
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 🔧 Environment Configuration
 
 ### 🗄️ **Backend Environment Variables (`backend/.env`)**
@@ -328,6 +338,8 @@ VITE_APP_BACKEND_URL=http://localhost:5000
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 📱 Application Features & User Flows
 
 ### 👤 **For Portfolio Visitors**
@@ -365,6 +377,8 @@ VITE_APP_BACKEND_URL=http://localhost:5000
 - **🔧 Software Apps**: Showcase developed applications with descriptions
 
 ---
+
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 🌐 API Endpoints & Documentation
 
@@ -430,6 +444,8 @@ DELETE /api/v1/softwareapplication/delete/:id   # Delete application
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 🎨 UI/UX Design Philosophy
 
 ### 🎯 **Design Principles**
@@ -456,6 +472,8 @@ DELETE /api/v1/softwareapplication/delete/:id   # Delete application
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 📊 Admin Dashboard Features
 
 ### 🏠 **Dashboard Overview**
@@ -480,6 +498,8 @@ DELETE /api/v1/softwareapplication/delete/:id   # Delete application
 - **📱 Mobile Admin**: Touch-friendly administration on mobile devices
 
 ---
+
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 🚦 Production Optimizations
 
@@ -506,32 +526,7 @@ DELETE /api/v1/softwareapplication/delete/:id   # Delete application
 
 ---
 
-## 🧪 Testing Strategy
-
-### 🧪 **Testing Approach**
-```bash
-# Backend API Testing
-cd backend
-npm test
-
-# Frontend Component Testing
-cd portfolio
-npm test
-
-# Dashboard Testing
-cd dashboard
-npm test
-```
-
-### 📊 **Test Coverage Areas**
-- **🔌 API Endpoints**: All CRUD operations and authentication flows
-- **🎯 Authentication**: Login/logout flows and token validation
-- **📝 Form Validation**: Input validation and error handling
-- **⚛️ React Components**: Component rendering and user interactions
-- **🛠️ Redux Store**: State management and action creators
-- **📱 Responsive Design**: Cross-device compatibility testing
-
----
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 🚀 Deployment Guide
 
@@ -558,45 +553,11 @@ npm test
 
 ---
 
-## 🐛 Troubleshooting & FAQ
-
-### ❓ **Common Issues**
-
-#### 🗃️ **Database Connection Problems**
-- Verify MongoDB service is running locally
-- Check Atlas connection string format and credentials
-- Ensure network connectivity and IP whitelist configuration
-- Verify database user permissions and roles
-
-#### ☁️ **Cloudinary Integration Issues**
-- Confirm API credentials are correctly set
-- Check Cloudinary account quotas and limits
-- Verify file upload size restrictions
-- Ensure proper CORS configuration for uploads
-
-#### 📧 **Email Service Problems**
-- Verify SMTP credentials and app passwords
-- Check email service rate limits
-- Ensure proper email template formatting
-- Verify recipient email addresses
-
-#### 🔐 **Authentication Issues**
-- Check JWT secret configuration
-- Verify token expiration settings
-- Ensure cookies are properly configured
-- Check for token blacklisting issues
-
-### 🔧 **Performance Troubleshooting**
-- **📊 Bundle Size**: Use webpack-bundle-analyzer for optimization
-- **🖼️ Image Optimization**: Implement lazy loading and compression
-- **⚡ API Performance**: Optimize database queries and caching
-- **📱 Mobile Performance**: Test on various devices and network conditions
-
----
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
 
 ---
 
@@ -639,6 +600,8 @@ We welcome contributions, issues, and feature requests!
 
 ---
 
+[⬅️ Back to Table of Contents](#-table-of-contents)
+
 ## 👥 Project Team & Acknowledgments
 
 ### 🏆 **Core Development Team**
@@ -659,13 +622,9 @@ We welcome contributions, issues, and feature requests!
 - **☁️ Cloudinary**: For the robust image management platform
 - **🔧 Vite Team**: For the lightning-fast build tool
 
-### 🌟 **Special Thanks**
-- **🎓 Open Source Community**: For inspiration and learning resources
-- **📚 MDN Web Docs**: For comprehensive web development documentation
-- **🔧 Stack Overflow**: For problem-solving and debugging assistance
-- **🎨 Design Inspiration**: Modern portfolio websites and UI/UX trends
-
 ---
+
+[⬅️ Back to Table of Contents](#-table-of-contents)
 
 ## 📞 **Contact & Connect**
 
