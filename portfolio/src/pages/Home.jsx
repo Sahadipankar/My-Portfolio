@@ -43,15 +43,16 @@ const Home = () => {
         - Responsive padding and margins for different screen sizes
         - Maximum width constraint for optimal reading experience
         - Consistent gap spacing between sections
+        - No top margin needed since navbar is now fixed with spacer
       */}
-      <article className="px-5 mt-10 sm:mt-14 md:mt-16 lg:mt-24 xl:mt-32 sm:mx-auto w-full max-w-[1050px] flex flex-col gap-14">
+      <article className="px-5 sm:mx-auto w-full max-w-[1050px] flex flex-col gap-14">
 
         {/* ====================================
             ABOUT SECTION
             ==================================== */}
         {/* Hero introduction and personal information */}
-        <section id="about" className="scroll-mt-20">
           <Hero />   {/* Main hero banner with name, title, and call-to-action */}
+        <section id="about" className="scroll-mt-16">
           <About />  {/* Detailed about me section with biography */}
         </section>
 
@@ -59,7 +60,7 @@ const Home = () => {
             EXPERIENCE SECTION
             ==================================== */}
         {/* Professional work experience and achievements */}
-        <section id="experience" className="scroll-mt-20">
+        <section id="experience" className="scroll-mt-16">
           <Experience />
         </section>
 
@@ -67,7 +68,7 @@ const Home = () => {
             TIMELINE SECTION
             ==================================== */}
         {/* Career progression and important milestones */}
-        <section id="timeline" className="scroll-mt-20">
+        <section id="timeline" className="scroll-mt-16">
           <Timeline />
         </section>
 
@@ -75,7 +76,7 @@ const Home = () => {
             SKILLS SECTION
             ==================================== */}
         {/* Technical skills with proficiency indicators */}
-        <section id="skills" className="scroll-mt-20">
+        <section id="skills" className="scroll-mt-16">
           <Skills />
         </section>
 
@@ -83,7 +84,7 @@ const Home = () => {
             PORTFOLIO SECTION
             ==================================== */}
         {/* Showcase of completed projects and work samples */}
-        <section id="portfolio" className="scroll-mt-20">
+        <section id="portfolio" className="scroll-mt-16">
           <Portfolio />
         </section>
 
@@ -91,7 +92,7 @@ const Home = () => {
             SOFTWARE APPLICATIONS SECTION
             ==================================== */}
         {/* Tools, software, and technologies used */}
-        <section id="myapps" className="scroll-mt-20">
+        <section id="myapps" className="scroll-mt-16">
           <MyApps />
         </section>
 
@@ -99,7 +100,7 @@ const Home = () => {
             CONTACT SECTION
             ==================================== */}
         {/* Contact form and communication channels */}
-        <section id="contact" className="scroll-mt-20">
+        <section id="contact" className="scroll-mt-16">
           <Contact />
         </section>
 

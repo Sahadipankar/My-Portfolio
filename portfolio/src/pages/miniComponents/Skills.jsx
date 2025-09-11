@@ -54,8 +54,7 @@ const Skills = () => {
       {/* ====================================
           SECTION TITLE
           ==================================== */}
-      <h1 className="text-tubeLight-effect text-[2rem] sm:text-[2.75rem] md:text-[3rem] 
-      lg:text-[3.8rem] tracking-[15px] dancing_text mx-auto w-fit">
+      <h1 className="font-extrabold text-[2rem] sm:text-[2.75rem] md:text-[3rem] lg:text-[3.8rem] tracking-[18px] dancing_text mx-auto w-fit text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient">
         SKILLS
       </h1>
 
@@ -75,7 +74,7 @@ const Skills = () => {
               {/* ====================================
                   CATEGORY HEADER
                   ==================================== */}
-              <h2 className="text-xl font-bold mb-4 capitalize">{cat}</h2>
+              <h2 className="text-xl font-bold mb-4 capitalize text-[#8245ec]">{cat}</h2>
 
               {/* ====================================
                   SKILLS GRID FOR CATEGORY
@@ -85,7 +84,7 @@ const Skills = () => {
                 {skills && skills.filter((s) => s.category === cat).length > 0 ? (
                   // Render skill cards for this category
                   skills.filter((s) => s.category === cat).map((element) => (
-                    <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3" key={element._id}>
+                    <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3 bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-[#8245ec] transition-colors" key={element._id}>
                       {/* Skill icon/logo */}
                       <img
                         src={element.svg && element.svg.url}
@@ -93,14 +92,14 @@ const Skills = () => {
                         className="h-12 sm:h-24 w-auto"
                       />
                       {/* Skill name */}
-                      <p className="text-muted-foreground text-center">
+                      <p className="text-gray-300 text-center">
                         {element.title}
                       </p>
                     </Card>
                   ))
                 ) : (
                   // Display message if no skills found for this category
-                  <p className="text-lg text-muted-foreground">No {cat} skill added.</p>
+                  <p className="text-lg text-gray-400">No {cat} skill added.</p>
                 )}
               </div>
             </div>

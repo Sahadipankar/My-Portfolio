@@ -20,13 +20,13 @@ const Footer = () => {
           FOOTER DIVIDER
           ==================================== */}
       {/* Horizontal rule to separate footer from main content */}
-      <hr />
+      <hr className="border-gray-700" />
 
       {/* ====================================
           THANK YOU MESSAGE
           ==================================== */}
       {/* Responsive thank you message with special styling */}
-      <h1 className="text-tubeLight-effect text-2xl sm:text-3xl mt-5 flex justify-center items-center text-center tracking-[4px] sm:tracking-[8px]">
+      <h1 className="text-[#8245ec] text-2xl sm:text-3xl mt-5 flex justify-center items-center text-center tracking-[4px] sm:tracking-[8px] font-semibold">
         Thank You For Scrolling
       </h1>
     </footer>

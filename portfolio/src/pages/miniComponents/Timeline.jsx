@@ -8,6 +8,7 @@
 // Import HTTP client and React hooks
 import axios from "axios";                        // HTTP client for API requests
 import React, { useEffect, useState } from "react"; // React hooks for state and side effects
+import BlurBlob from "../../components/BlurBlob";
 
 /**
  * Timeline Component
@@ -51,7 +52,7 @@ const Timeline = () => {
       {/* ====================================
           SECTION TITLE
           ==================================== */}
-      <h1 className="overflow-x-hidden text-[2rem] sm:text-[1.75rem] md:text-[2.2rem] lg:text-[2.8rem] mb-4 font-extrabold">
+      <h1 className="overflow-x-hidden text-[2rem] sm:text-[1.75rem] md:text-[2.2rem] lg:text-[2.8rem] mb-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient">
         ACADEMICS
       </h1>
 
@@ -65,7 +66,7 @@ const Timeline = () => {
         </div>
       ) : (
         // Timeline visualization with vertical line and icons
-        <ol className="relative border-s border-gray-200 dark:border-gray-700">
+        <ol className="relative border-s border-[#8245ec]">
           {/* ====================================
               TIMELINE ITEMS RENDERING
               ==================================== */}
@@ -76,10 +77,10 @@ const Timeline = () => {
                   {/* ====================================
                       TIMELINE ICON/MARKER
                       ==================================== */}
-                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                  <span className="absolute flex items-center justify-center w-6 h-6 bg-[#8245ec] rounded-full -start-3 ring-8 ring-gray-900">
                     {/* Calendar icon to represent timeline events */}
                     <svg
-                      className="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+                      className="w-2.5 h-2.5 text-white"
                       aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
@@ -93,17 +94,17 @@ const Timeline = () => {
                       TIMELINE CONTENT
                       ==================================== */}
                   {/* Event title */}
-                  <h3 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white">
+                  <h3 className="mb-2 text-lg font-semibold text-white">
                     {element.title}
                   </h3>
 
                   {/* Event timeframe (from - to dates) */}
-                  <time className="block mb-2 mt-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                  <time className="block mb-2 mt-1 text-sm font-normal leading-none text-gray-400">
                     {element.timeline.from} - {element.timeline.to ? element.timeline.to : " "}
                   </time>
 
                   {/* Event description */}
-                  <p className="text-base font-normal text-gray-500 dark:text-gray-400">
+                  <p className="text-base font-normal text-gray-300">
                     {element.description}
                   </p>
                 </li>

@@ -68,7 +68,7 @@ const Portfolio = () => {
           }}
         >
           <span className="ml-3">MY</span>{" "}
-          <span className="text-tubeLight-effect font-extrabold">
+          <span className="font-extrabold">
             PROJECTS
           </span>
         </h1>
@@ -82,7 +82,7 @@ const Portfolio = () => {
             background: "hsl(222.2 84% 4.9%)",
           }}
         >
-          <span className="ml-3">MY</span><span className="text-tubeLight-effect font-extrabold">WORK</span>
+          <span className="ml-3">MY</span><span className="font-extrabold">WORK</span>
         </h1>
 
         {/* Decorative line behind the heading */}
@@ -109,15 +109,15 @@ const Portfolio = () => {
             projects.map((element) => {
               return (
                 <Link to={`/project/${element._id}`} key={element._id}>
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center group">
                     {/* Project banner image */}
                     <img
                       src={element.projectBanner && element.projectBanner.url}
                       alt={element.title}
-                      className="w-48 h-32 object-cover rounded-lg border"
+                      className="w-48 h-32 object-cover rounded-lg border border-gray-700 group-hover:border-[#8245ec] transition-colors"
                     />
                     {/* Project title */}
-                    <p className="mt-2 text-center font-semibold">{element.title}</p>
+                    <p className="mt-2 text-center font-semibold text-gray-300 group-hover:text-[#8245ec] transition-colors">{element.title}</p>
                   </div>
                 </Link>
               );
@@ -127,15 +127,15 @@ const Portfolio = () => {
             projects.slice(0, 3).map((element) => {
               return (
                 <Link to={`/project/${element._id}`} key={element._id}>
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center group">
                     {/* Project banner image */}
                     <img
                       src={element.projectBanner && element.projectBanner.url}
                       alt={element.title}
-                      className="w-48 h-32 object-cover rounded-lg border"
+                      className="w-48 h-32 object-cover rounded-lg border border-gray-700 group-hover:border-[#8245ec] transition-colors"
                     />
                     {/* Project title */}
-                    <p className="mt-2 text-center font-semibold">{element.title}</p>
+                    <p className="mt-2 text-center font-semibold text-gray-300 group-hover:text-[#8245ec] transition-colors">{element.title}</p>
                   </div>
                 </Link>
               );
@@ -149,7 +149,7 @@ const Portfolio = () => {
       {/* Only show button if there are more than 9 projects */}
       {projects && projects.length > 9 && (
         <div className="w-full text-center my-9">
-          <Button className="w-52" onClick={() => setViewAll(!viewAll)}>
+          <Button className="w-52 bg-[#8245ec] hover:bg-[#7239d4] text-white" onClick={() => setViewAll(!viewAll)}>
             {viewAll ? "Show Less" : "Show More"}
           </Button>
         </div>

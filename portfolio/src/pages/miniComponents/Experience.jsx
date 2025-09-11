@@ -53,7 +53,7 @@ const Experience = () => {
     return (
         <section
             id="experience"
-            className="pt-0 sm:pt-0 md:pt-0 pb-16 px-2 md:px-10 lg:px-32 font-sans min-h-screen bg-gradient-to-br relative overflow-x-hidden"
+            className="mt-5 pt-0 sm:pt-0 md:pt-0 pb-16 px-2 md:px-10 lg:px-32 font-sans min-h-screen bg-gradient-to-br relative overflow-x-hidden"
         >
             {/* ====================================
                 BACKGROUND EFFECTS

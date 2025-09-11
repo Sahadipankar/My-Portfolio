@@ -21,6 +21,7 @@ import ProjectView from "./pages/ProjectView";      // Individual project detail
 
 // Import shared components
 import Footer from "./pages/miniComponents/Footer"; // Site footer with links and info
+import BlurBlob from "./components/BlurBlob"; // Animated background blob effect
 
 // Import toast notification system for user feedback
 import { ToastContainer } from "react-toastify";
@@ -38,28 +39,39 @@ function App() {
     // ====================================
     // Provides dark/light theme functionality across the entire application
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Router>
-        {/* ====================================
-            APPLICATION ROUTING
-            ==================================== */}
-        <Routes>
-          {/* Main portfolio homepage - displays all sections */}
-          <Route path="/" element={<Home />} />
+      <div className="bg-[#050414] min-h-screen">
 
-          {/* Individual project view with dynamic project ID */}
-          <Route path="/project/:id" element={<ProjectView />} />
-        </Routes>
+        {/* Animated background blob */}
+        <BlurBlob position={{ top: '35%', left: '20%' }} size={{ width: '30%', height: '40%' }} />
 
-        {/* ====================================
-            GLOBAL COMPONENTS
-            ==================================== */}
+        {/* Grid overlay background */}
+        <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-        {/* Site footer - appears on all pages */}
-        <Footer />
+        <div className="relative z-10">
+          <Router>
+            {/* ====================================
+                APPLICATION ROUTING
+                ==================================== */}
+            <Routes>
+              {/* Main portfolio homepage - displays all sections */}
+              <Route path="/" element={<Home />} />
 
-        {/* Global toast notification container for user feedback */}
-        <ToastContainer position="bottom-right" theme="dark" />
-      </Router>
+              {/* Individual project view with dynamic project ID */}
+              <Route path="/project/:id" element={<ProjectView />} />
+            </Routes>
+
+            {/* ====================================
+                GLOBAL COMPONENTS
+                ==================================== */}
+
+            {/* Site footer - appears on all pages */}
+            <Footer />
+
+            {/* Global toast notification container for user feedback */}
+            <ToastContainer position="bottom-right" theme="dark" />
+          </Router>
+        </div>
+      </div>
     </ThemeProvider>
   );
 }

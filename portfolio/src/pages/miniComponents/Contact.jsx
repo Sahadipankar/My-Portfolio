@@ -82,7 +82,7 @@ const Contact = () => {
             }}
           >
             <span className="ml-3">CONTACT</span>
-            <span className="text-tubeLight-effect font-extrabold">ME</span>
+            <span className="font-extrabold">ME</span>
           </h1>
           {/* Decorative line behind the heading */}
           <span className="absolute w-full h-1 top-7 sm:top-7 
@@ -98,11 +98,12 @@ const Contact = () => {
               SENDER NAME INPUT FIELD
               ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
-            <Label className="text-xl">Your Name</Label>
+            <Label className="text-xl text-gray-300">Your Name</Label>
             <Input
               value={senderName}
               onChange={(e) => setSenderName(e.target.value)}
               placeholder="Your Name"
+              className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 focus:border-[#8245ec]"
               required
             />
           </div>
@@ -111,11 +112,12 @@ const Contact = () => {
               SUBJECT INPUT FIELD
               ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
-            <Label className="text-xl">Subject</Label>
+            <Label className="text-xl text-gray-300">Subject</Label>
             <Input
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               placeholder="Subject"
+              className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 focus:border-[#8245ec]"
               required
             />
           </div>
@@ -124,11 +126,12 @@ const Contact = () => {
               MESSAGE INPUT FIELD
               ==================================== */}
           <div className="flex flex-col gap-2 px-1.5">
-            <Label className="text-xl">Message</Label>
+            <Label className="text-xl text-gray-300">Message</Label>
             <Input
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Your Message"
+              className="bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-400 focus:border-[#8245ec]"
               required
             />
           </div>
@@ -139,19 +142,19 @@ const Contact = () => {
           <div className="flex justify-end">
             {!loading ? (
               // Normal submit button
-              <Button className="w-full sm:w-52">SEND MESSAGE</Button>
+              <Button className="w-full sm:w-52 bg-[#8245ec] hover:bg-[#7239d4] text-white">SEND MESSAGE</Button>
             ) : (
               // Loading button with spinner
               <button
                 disabled
                 type="button"
-                className="w-full sm:w-52 text-slate-900  bg-white hover:bg-slate-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 dark:bg-white dark:hover:bg-slate-200 dark:focus:ring-blue-800 inline-flex items-center"
+                className="w-full sm:w-52 text-white bg-[#8245ec]/70 hover:bg-[#8245ec]/70 focus:ring-4 focus:outline-none focus:ring-[#8245ec]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 inline-flex items-center"
               >
                 {/* Loading spinner icon */}
                 <svg
                   aria-hidden="true"
                   role="status"
-                  className="inline w-4 h-4 me-3 text-slate-950 animate-spin"
+                  className="inline w-4 h-4 me-3 text-white animate-spin"
                   viewBox="0 0 100 101"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

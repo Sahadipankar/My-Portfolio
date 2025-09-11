@@ -55,7 +55,7 @@ const MyApps = () => {
       {/* ====================================
           SECTION TITLE
           ==================================== */}
-      <h1 className="text-tubeLight-effect text-[2rem] sm:text-[2.75rem] md:text-[3rem] lg:text-[3.8rem] tracking-[15px] dancing_text mx-auto w-fit">
+      <h1 className="font-xt text-[2rem] sm:text-[2.75rem] md:text-[3rem] lg:text-[3.8rem] tracking-[18px] dancing_text mx-auto w-fit font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient">
         SOFTWARE
       </h1>
 
@@ -76,7 +76,7 @@ const MyApps = () => {
           {apps &&
             apps.map((element) => {
               return (
-                <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3" key={element._id}>
+                <Card className="h-fit p-7 flex flex-col justify-center items-center gap-3 bg-gray-800/50 backdrop-blur-sm border-gray-700 hover:border-[#8245ec] transition-colors" key={element._id}>
                   {/* Application logo/icon */}
                   <img
                     src={element.svg && element.svg.url}
@@ -84,7 +84,7 @@ const MyApps = () => {
                     className="h-12 sm:h-24 w-auto"
                   />
                   {/* Application name */}
-                  <p className="text-muted-foreground text-center">
+                  <p className="text-gray-300 text-center">
                     {element.name}
                   </p>
                 </Card>
