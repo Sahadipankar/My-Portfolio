@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
  */
 const About = () => {
   return (
-    <div className="w-full flex flex-col overflow-x-hidden -mt-6">
+    <div className="w-full flex flex-col overflow-x-hidden -mt-16">
       <br></br>
 
       {/* ====================================
@@ -58,9 +58,9 @@ const About = () => {
           <div className="flex justify-center items-center">
             {/* Personal photo with styling effects */}
             <img
-              src="My Img.jpg"
+              src="https://res.cloudinary.com/dyjrsgbze/image/upload/v1757616486/Picsart_24-10-13_17-19-01-247_k4e0jb.jpg"
               alt="avatar"
-              className="bg-white p-2 sm:p-4 rotate-[25deg] h-[240px] sm:h-[340px] md:h-[350px] lg:h-[450px]"
+              className="bg-white p-2 sm:p-4 rotate-[25deg] h-[240px] sm:h-[340px] md:h-[350px] lg:h-[440px]"
             />
           </div>
 

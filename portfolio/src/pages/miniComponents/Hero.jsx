@@ -93,8 +93,7 @@ const Hero = () => {
   // ====================================
 
   return (
-    <div className="w-full">
-      <br></br>
+    <div className="w-full mt-3">
       <br></br>
 
       {/* ====================================
@@ -205,7 +204,7 @@ const Hero = () => {
             gyroscope={true}
           >
             <img
-              src="1.jpg"
+              src="https://res.cloudinary.com/dyjrsgbze/image/upload/v1757616484/1_xahqjj.jpg"
               alt="Dipankar Saha"
               className="w-full h-full rounded-full object-cover drop-shadow-[0_10px_20px_rgba(130,69,236,0.5)]"
             />
