@@ -93,7 +93,7 @@ const Hero = () => {
   // ====================================
 
   return (
-    <div className="w-full mt-3">
+    <div className="w-full mt-5">
       <br></br>
 
       {/* ====================================
@@ -125,12 +125,12 @@ const Hero = () => {
           {/* ====================================
               DYNAMIC TYPEWRITER HEADING
               ==================================== */}
-          <h1 className="overflow-x-hidden text-[1.3rem] sm:text-[1.75rem] md:text-[2.2rem] lg:text-[1rem] tracking-[15px] flex flex-wrap items-center justify-center md:justify-start font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>
-            <span className="inline-block text-white"></span>
+          <h1 className="overflow-x-hidden text-[0.8rem] sm:text-[1.5rem] md:text-[2rem] lg:text-[1.6rem] tracking-[4px] flex flex-wrap items-center justify-center md:justify-start font-bold">
+            <span className="inline-block">I'm a&nbsp;</span>
             <span className="inline-block text-[#885ad9]">
               {/* Dynamic typewriter effect displaying different roles */}
               <Typewriter
-                words={["FULLSTACK DEVELOPER", "SOFTWARE ENGINEER", "DATA SCIENTIST"]}
+                words={["FULLSTACK DEVELOPER", "SOFTWARE DEVELOPER", "DATA SCIENTIST"]}
                 loop={50}           // Number of animation loops
                 cursor              // Show blinking cursor
                 typeSpeed={70}      // Typing speed in milliseconds
@@ -139,7 +139,6 @@ const Hero = () => {
               />
             </span>
           </h1>
-
           {/* ====================================
               SOCIAL MEDIA LINKS
               ==================================== */}
@@ -217,9 +216,6 @@ const Hero = () => {
           ==================================== */}
       <br></br>
       <hr className="my-8 md:my-10 border-gray-700" />
-      <br></br>
-      <br></br>
-
     </div>
   );
 };

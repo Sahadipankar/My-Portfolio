@@ -51,8 +51,8 @@ const Home = () => {
             ABOUT SECTION
             ==================================== */}
         {/* Hero introduction and personal information */}
-          <Hero />   {/* Main hero banner with name, title, and call-to-action */}
-        <section id="about" className="scroll-mt-16">
+        <Hero />   {/* Main hero banner with name, title, and call-to-action */}
+        <section id="about" className="scroll-mt-20">
           <About />  {/* Detailed about me section with biography */}
         </section>
 

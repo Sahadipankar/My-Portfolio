@@ -74,7 +74,7 @@ const Skills = () => {
               {/* ====================================
                   CATEGORY HEADER
                   ==================================== */}
-              <h2 className="text-xl font-bold mb-4 capitalize text-[#8245ec]">{cat}</h2>
+              <h2 className="text-xl font-bold mb-4 capitalize text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient">{cat}</h2>
 
               {/* ====================================
                   SKILLS GRID FOR CATEGORY

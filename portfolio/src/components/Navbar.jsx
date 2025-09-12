@@ -44,7 +44,8 @@ const scrollToSection = (id) => {
         const elementPosition = element.offsetTop;
 
         // Calculate scroll position with proper offset
-        const offsetPosition = elementPosition - navbarHeight - 20; // Extra 20px padding
+        // Reduced padding for more precise positioning
+        const offsetPosition = elementPosition - navbarHeight - 10; // Reduced from 20px to 10px
 
         // Smooth scroll to calculated position
         window.scrollTo({
@@ -121,10 +122,12 @@ const Navbar = () => {
 
     /**
      * Handle favicon click
-     * Scrolls to about section (top) and closes mobile menu
+     * Scrolls to top of page and closes mobile menu
      */
     const handleFaviconClick = () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });        setIsMobileMenuOpen(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        setIsMobileMenuOpen(false);
+        setActiveSection("about"); // Set about as active when scrolling to top
     };
 
     return (
@@ -164,14 +167,14 @@ const Navbar = () => {
                                     key={section.id}
                                     onClick={() => handleNavClick(section.id)}
                                     className={`text-sm font-semibold transition-all duration-200 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8245ec] hover:bg-gray-800/50 relative group ${activeSection === section.id
-                                            ? 'text-[#8245ec]'
-                                            : 'text-gray-300 hover:text-[#8245ec]'
+                                        ? 'text-[#8245ec]'
+                                        : 'text-gray-300 hover:text-[#8245ec]'
                                         }`}
                                 >
                                     {section.label}
                                     <span className={`absolute bottom-0 left-1/2 h-0.5 bg-[#8245ec] transition-all duration-200 ${activeSection === section.id
-                                            ? 'w-full -translate-x-1/2'
-                                            : 'w-0 group-hover:w-full group-hover:-translate-x-1/2'
+                                        ? 'w-full -translate-x-1/2'
+                                        : 'w-0 group-hover:w-full group-hover:-translate-x-1/2'
                                         }`}></span>
                                 </button>
                             ))}
@@ -214,8 +217,8 @@ const Navbar = () => {
                                     key={section.id}
                                     onClick={() => handleNavClick(section.id)}
                                     className={`mobile-menu-item w-full text-left px-6 py-3 text-base font-medium border-b border-gray-800/50 last:border-b-0 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#8245ec] focus:ring-inset group ${activeSection === section.id
-                                            ? 'text-[#8245ec] bg-gradient-to-r from-[#8245ec]/20 to-transparent'
-                                            : 'text-gray-300 hover:text-[#8245ec] hover:bg-gradient-to-r hover:from-[#8245ec]/10 hover:to-transparent'
+                                        ? 'text-[#8245ec] bg-gradient-to-r from-[#8245ec]/20 to-transparent'
+                                        : 'text-gray-300 hover:text-[#8245ec] hover:bg-gradient-to-r hover:from-[#8245ec]/10 hover:to-transparent'
                                         }`}
                                     style={{
                                         animationDelay: `${index * 50}ms`
@@ -224,8 +227,8 @@ const Navbar = () => {
                                     <span className="flex items-center justify-between">
                                         {section.label}
                                         <span className={`transition-opacity duration-200 ${activeSection === section.id
-                                                ? 'opacity-100 text-[#8245ec]'
-                                                : 'opacity-0 group-hover:opacity-100 text-[#8245ec]'
+                                            ? 'opacity-100 text-[#8245ec]'
+                                            : 'opacity-0 group-hover:opacity-100 text-[#8245ec]'
                                             }`}>→</span>
                                     </span>
                                 </button>

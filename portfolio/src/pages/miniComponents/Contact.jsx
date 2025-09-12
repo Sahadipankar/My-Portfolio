@@ -74,7 +74,7 @@ const Contact = () => {
             ==================================== */}
         <div className="relative mb-8">
           <h1
-            className="flex gap-4 items-center text-[1.85rem] sm:text-[2.75rem] md:text-[3rem] 
+            className="flex gap-4 items-center text-[1.4rem] sm:text-[2.5rem] md:text-[3rem] 
             lg:text-[3rem] leading-[56px] md:leading-[67px] lg:leading-[90px] 
             tracking-[15px] mx-auto w-fit font-extrabold about-h1"
             style={{
