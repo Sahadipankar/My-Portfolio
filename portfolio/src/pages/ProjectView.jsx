@@ -1,4 +1,3 @@
-
 // ProjectView.jsx
 // This component displays detailed information about a single project, including title, description, technologies, stack, deployment status, and links.
 // It fetches project data from the backend using the project ID from the URL params and provides a button to return to the portfolio homepage.
@@ -8,6 +7,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
+import Navbar from "@/components/Navbar";
+import BlurBlob from "@/components/BlurBlob";
 
 
 const ProjectView = () => {
@@ -79,53 +80,64 @@ const ProjectView = () => {
     navigateTo("/");
   };
 
+
   // Show loading indicator while fetching project data
   if (loading) {
     return (
-      <div className="text-center text-white text-xl animate-pulse min-h-[60vh] flex items-center justify-center">
-        Loading project details... Please wait patiently.
+      <div className="bg-[#050414] min-h-screen relative">
+        {/* Animated background blob */}
+        <BlurBlob position={{ top: '35%', left: '20%' }} size={{ width: '30%', height: '40%' }} />
+        {/* Grid overlay background */}
+        <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-0"></div>
+        <div className="relative z-10 flex items-center justify-center min-h-[60vh]">
+          <div className="text-center text-white text-xl animate-pulse">
+            Loading project details... Please wait patiently.
+          </div>
+        </div>
       </div>
     );
   }
 
-  // Main render: display all project details in a styled layout
+
+  // Main render: display all project details in a styled layout, matching Home page background and theme
   return (
     <>
-      <div className="flex mt-7 justify-center items-center min-h-[100vh] sm:gap-4 sm:py-4">
-        <div className="w-[100%] px-5 md:w-[1000px] pb-5">
-          <div className="space-y-12">
-            <div className="border-b border-gray-900/10 pb-12">
+      <Navbar />
+      <div className="bg-[#050414] min-h-screen relative">
+        {/* Animated background blob */}
+        <BlurBlob position={{ top: '35%', left: '20%' }} size={{ width: '30%', height: '40%' }} />
+        {/* Grid overlay background */}
+        <div className="fixed inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] z-0"></div>
+        <div className="relative z-10 flex justify-center items-start min-h-[100vh] pt-6 pb-10 sm:pt-10 sm:pb-16">
+          <div className="w-full max-w-[1050px] px-2 sm:px-5">
+            <div className="p-3 sm:p-6 md:p-8 border-b border-gray-900/10 pb-8 sm:pb-12 bg-black/50 rounded-xl sm:rounded-2xl shadow-xl backdrop-blur-md">
               {/* Return to Portfolio button */}
-              <div className="flex justify-end">
+              <div className="flex justify-end pt-1 sm:pt-2">
                 <Button onClick={handleReturnToPortfolio}>
                   Return to Portfolio
                 </Button>
               </div>
-              <div className="mt-10 flex flex-col gap-5">
+              <div className="mt-6 sm:mt-8 flex flex-col gap-6 sm:gap-8">
                 {/* Project Title and Banner */}
-                <div className="w-full sm:col-span-4">
-                  <h1 className="text-4xl font-bold mb-4">{title}</h1>
+                <div className="w-full">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-[#fff] drop-shadow-2xl animate-gradient break-words">{title}</h1>
                   <img
-                    src={
-                      projectBannerPreview
-                        ? projectBannerPreview
-                        : "/avatarHolder.jpg"
-                    }
+                    src={projectBannerPreview ? projectBannerPreview : "/avatarHolder.jpg"}
                     alt="projectBanner"
-                    className="w-full h-auto"
+                    className="w-full h-auto rounded-lg sm:rounded-xl shadow-lg object-cover"
                   />
                 </div>
                 {/* Project Description */}
-                <div className="w-full sm:col-span-4">
-                  <p className="text-4xl mt-2 mb-5">Description:</p>
-                  <ul className="text-lg font-mono list-disc">
+                <div className="w-full">
+                  <p className="text-2xl sm:text-3xl mt-2 mb-2 sm:mb-3 text-[#8245ec] font-semibold">Description:</p>
+                  <ul className="text-base sm:text-lg font-mono list-disc ml-4 sm:ml-6 text-gray-200">
                     <li>{description}</li>
                   </ul>
                 </div>
                 {/* Technologies Used */}
-                <div className="w-full sm:col-span-4">
-                  <p className="text-4xl mt-2 mb-5">Technologies:</p>
-                  <ul className="text-lg font-mono list-disc">
+                <div className="w-full">
+                  <p className="text-2xl sm:text-3xl mt-2 mb-2 sm:mb-3 text-[#8245ec] font-semibold">Technologies:</p>
+                  <ul className="text-base sm:text-lg font-mono list-disc ml-4 sm:ml-6 text-gray-200">
                     {technologies
                       .split(",")
                       .map((item, index) => (
@@ -134,20 +146,20 @@ const ProjectView = () => {
                   </ul>
                 </div>
                 {/* Stack Information */}
-                <div className="w-full sm:col-span-4">
-                  <p className="text-4xl mt-2 mb-4">Stack:</p>
-                  <p className="text-lg font-mono font-semibold uppercase">{stack}</p>
+                <div className="w-full">
+                  <p className="text-2xl sm:text-3xl mt-2 mb-2 sm:mb-3 text-[#8245ec] font-semibold">Stack:</p>
+                  <p className="text-base sm:text-lg font-mono font-semibold uppercase text-gray-100">{stack}</p>
                 </div>
                 {/* Deployment Status */}
-                <div className="w-full sm:col-span-4">
-                  <p className="text-4xl mt-2 mb-4">Deployed:</p>
-                  <p className="text-lg font-mono font-semibold">{deployed}</p>
+                <div className="w-full">
+                  <p className="text-2xl sm:text-3xl mt-2 mb-2 sm:mb-3 text-[#8245ec] font-semibold">Deployed:</p>
+                  <p className="text-base sm:text-lg font-mono font-semibold text-gray-100">{deployed}</p>
                 </div>
                 {/* GitHub Repository Link */}
-                <div className="w-full sm:col-span-4 mt-2">
-                  <p className="text-4xl mb-4">Github Repository Link:</p>
+                <div className="w-full mt-1 sm:mt-2">
+                  <p className="text-2xl sm:text-3xl mb-2 sm:mb-3 text-[#8245ec] font-semibold">Github Repository Link:</p>
                   <Link
-                    className="text-sky-700 text-lg"
+                    className="text-sky-400 text-base sm:text-lg underline hover:text-sky-300 transition-colors break-all"
                     target="_blank"
                     to={gitRepoLink}
                   >
@@ -155,10 +167,10 @@ const ProjectView = () => {
                   </Link>
                 </div>
                 {/* Live Project Link */}
-                <div className="w-full sm:col-span-4 mt-2">
-                  <p className="text-4xl mb-4">Project Link:</p>
+                <div className="w-full mt-1 sm:mt-2">
+                  <p className="text-2xl sm:text-3xl mb-2 sm:mb-3 text-[#8245ec] font-semibold">Project Link:</p>
                   <Link
-                    className="text-sky-700 text-lg"
+                    className="text-sky-400 text-base sm:text-lg underline hover:text-sky-300 transition-colors break-all"
                     target="_blank"
                     to={projectLink}
                   >
